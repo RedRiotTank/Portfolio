@@ -1,0 +1,42 @@
+---
+// src/components/WhoAmI.astro
+export interface Props {
+  title?: string;
+  highlightColor?: string;
+}
+
+const { 
+  title = "WHO AM I?",
+  highlightColor = "text-pink-400" 
+} = Astro.props;
+---
+
+<section class="max-w-2xl mx-auto px-4 py-8">
+  <h2 class={`text-2xl font-bold ${highlightColor} mb-6 border-b border-pink-500 pb-2`}>
+    {title}
+  </h2>
+  
+  <div class="space-y-4 text-gray-300">
+    <p>
+      Hello! I'm <span class="text-white font-semibold">Alberto Plaza Montes</span>, 
+      a 23-year-old computer engineer from Spain.
+    </p>
+    
+    <p>
+      I'm currently pursuing my <span class="text-white font-semibold">Master's degree</span> 
+      while working in the <span class="text-white font-semibold">FinTech sector</span> as both a 
+      <span class={`${highlightColor}`}>Backend Developer</span> and <span class={`${highlightColor}`}>Software Architect</span>.
+    </p>
+    
+    <p>
+      In my free time, I'm passionate about personal projects ranging from 
+      <span class="text-green-400">Minecraft server plugins</span> to prototyping new 
+      <span class="text-green-400">FinTech ideas</span> and similar ventures.
+    </p>
+    
+    <p class="pt-4 italic text-gray-400">
+      I'm always learning and seeking new challenges that help me grow both 
+      professionally and personally.
+    </p>
+  </div>
+</section>

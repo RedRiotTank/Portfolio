@@ -1,0 +1,19 @@
+---
+export interface Props {
+  text: string;
+  align?: 'left' | 'center' | 'right';
+}
+
+const { text, align = 'center' } = Astro.props;
+
+// Mapeo de clases de alineación
+const alignmentClasses = {
+  left: 'text-left',
+  center: 'text-center',
+  right: 'text-right'
+};
+---
+
+<h2 class={`text-pink-500 text-sm font-bold uppercase tracking-widest mb-2 ${alignmentClasses[align]}`}>
+  {text}
+</h2>

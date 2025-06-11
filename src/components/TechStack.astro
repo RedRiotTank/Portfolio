@@ -1,0 +1,34 @@
+---
+const techStack = [
+  { name: "Java", logo: "/images/stack/java.png" },
+  { name: "Spring Boot", logo: "/images/stack/springboot.svg" },
+  { name: "Kotlin", logo: "/images/stack/kotlin.png" },
+  { name: "Ktor", logo: "/images/stack/ktor.png" },
+  { name: "Jenkins", logo: "/images/stack/jenkins.png" },
+  { name: "mysql", logo: "/images/stack/mysql.png" },
+  { name: "MariaDB", logo: "/images/stack/mariadb.png" },
+  { name: "Git", logo: "/images/stack/git.png" },
+  { name: "Gradle", logo: "/images/stack/gradle.png" },
+  { name: "Docker", logo: "/images/stack/docker.png" },
+  { name: "Open Api", logo: "/images/stack/openapi.png" },
+  { name: "Kafka", logo: "/images/stack/kafka.webp" },
+  { name: "Redis", logo: "/images/stack/redis.png" },
+  { name: "MapStruct", logo: "/images/stack/mapstruct.png" },
+  { name: "Angular", logo: "/images/stack/angular.png" },
+  { name: "TypeScript", logo: "/images/stack/ts.png" },
+];
+---
+
+<section class="py-12">
+  <h2 class="text-3xl font-bold text-center mb-6 text-gray-900 dark:text-white">
+    Tech Stack
+  </h2>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-8 justify-items-center">
+    {techStack.map((tech) => (
+      <div class="flex flex-col items-center text-center">
+        <img src={tech.logo} alt={tech.name} class="w-16 h-16 object-contain mb-2" />
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{tech.name}</span>
+      </div>
+    ))}
+  </div>
+</section>

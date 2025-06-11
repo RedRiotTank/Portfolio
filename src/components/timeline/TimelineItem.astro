@@ -1,0 +1,37 @@
+---
+// Props
+const {
+  logo,
+  alt,
+  title,
+  subtitle = "",
+  startDate,
+  endDate,
+  isOngoing = false,
+  description,
+} = Astro.props;
+
+// Render date range
+const dateRange = isOngoing ? `${startDate} – Present` : `${startDate} – ${endDate}`;
+---
+
+
+<li class="mb-10 relative ps-16 max-w-full">
+  <span class="absolute top-0 left-0 flex items-center justify-center w-10 h-10 bg-white rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-gray-800">
+    <img src={logo} alt={alt} class="w-full h-full object-cover rounded-full" />
+  </span>
+
+  <h3 class="mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+    {title}
+  </h3>
+  {subtitle && (
+    <p class="text-sm text-gray-400 dark:text-gray-500 mb-1">{subtitle}</p>
+  )}
+  <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+    {dateRange}
+  </time>
+  <p class="text-base font-normal text-gray-500 dark:text-gray-400">
+    {description}
+  </p>
+</li>
+

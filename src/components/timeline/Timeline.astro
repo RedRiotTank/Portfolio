@@ -1,0 +1,49 @@
+---
+import TimelineItem from './TimelineItem.astro';
+---
+
+<div class="max-w-3xl mx-auto px-4">
+    <ol class="relative border-s border-gray-200 dark:border-gray-700">
+
+        <TimelineItem
+            logo="/images/ugr_logo.png"
+            alt="UGR"
+            title="M.Sc. in Computer Science & Engineering"
+            subtitle="University of Granada · Spain"
+            startDate="Sep 2024"
+            endDate="Present"
+            description="Specialization in Software Engineering. Projects in web development, algorithms, and data structures. Graduated with solid foundations in computer science."
+        />
+
+        <TimelineItem
+            logo="/images/keifi_logo.png"
+            alt="Keifi"
+            title="Software Engineer at Keifi by Izertis"
+            subtitle="Hybrid · Spain"
+            startDate="Jun 2024"
+            endDate="Present"
+            isOngoing={true}
+            description="Building & designing scalable microservices and REST APIs using Java and Spring Boot with a DDD architecture. Building CI/CD pipelines with Jenkins and Docker. Collaborating with cross-functional teams to deliver high-quality software solutions."
+        />
+
+        <TimelineItem
+            logo="/images/keifi_logo.png"
+            alt="Keifi Intern"
+            title="Software Engineer Intern at Keifi Technologies"
+            subtitle="Hybrid · Spain"
+            startDate="Jun 2023"
+            endDate="Dec 2023"
+            description="Developed microservices using Java and Spring Boot & built UX/UI using Angular for financial clients. Integrated external systems, built REST APIs, and worked with CI/CD tools like Jenkins and Docker."
+        />
+
+        <TimelineItem
+            logo="/images/ugr_logo.png"
+            alt="UGR"
+            title="B.Sc. in Engineering & Computer Science"
+            subtitle="University of Granada · Spain"
+            startDate="Sep 2020"
+            endDate="Jun 2024"
+            description="Studied core topics in computer science and engineering, including mathematics, algorithms, and systems design. Built strong programming skills in Java, Python, and C++. Gained experience in teamwork and communication through group projects and presentations. Specialized in Information Systems and database management."
+        />
+    </ol>
+</div>
