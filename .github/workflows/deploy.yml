@@ -28,6 +28,7 @@ jobs:
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          port: ${{ secrets.SSH_PORT }}
 
       - name: Deploy via SSH
         uses: easingthemes/ssh-deploy@v4.0.0
