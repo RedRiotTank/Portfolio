@@ -38,4 +38,4 @@ jobs:
           SOURCE: "dist/"
           TARGET: "/var/www/portfolio/"
           ARGS: "-avz --delete"
-          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_CMD_ARGS: "-p ${{ secrets.SSH_PORT }}"
