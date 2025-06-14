@@ -1,9 +1,16 @@
 <nav x-data="{ open: false }" class="py-6 px-8 max-w-7xl mx-auto">
   <div class="flex justify-between items-center">
     <div class="flex items-center gap-3">
-      <img src="/images/Profile_pic.jpg" alt="Alberto's profile pic" class="w-10 h-10 rounded-full object-cover" />
-      <span class="text-white font-semibold text-lg">Alberto</span>
-    </div>
+  <a href="/" class="flex items-center gap-3">
+    <img 
+      src="/images/Profile_pic.jpg" 
+      alt="Alberto's profile pic" 
+      class="w-10 h-10 rounded-full object-cover"
+    />
+    <span class="text-white font-semibold text-lg">Alberto</span>
+  </a>
+  
+</div>
 
     <button @click="open = !open" class="md:hidden text-white focus:outline-none">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
