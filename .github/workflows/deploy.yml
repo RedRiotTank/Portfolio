@@ -30,10 +30,11 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "dist/*"
+          source: "dist/"
           target: "/var/www/portfolio/"
+          strip_components: 1
 
-      - name: (Optional) Reload Nginx or run server commands
+      - name: Reload Nginx
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SERVER_HOST }}
