@@ -4,31 +4,46 @@ const techStack = [
   { name: "Spring Boot", logo: "/images/stack/springboot.svg" },
   { name: "Kotlin", logo: "/images/stack/kotlin.png" },
   { name: "Ktor", logo: "/images/stack/ktor.png" },
-  { name: "Jenkins", logo: "/images/stack/jenkins.png" },
+  { name: "Maven", logo: "/images/stack/maven.png" },
+  { name: "Gradle", logo: "/images/stack/gradle.png" },
+  { name: "MapStruct", logo: "/images/stack/mapstruct.png" },
+  { name: "Junit", logo: "/images/stack/junit.png" },
+  { name: "TypeScript", logo: "/images/stack/ts.png" },
+  { name: "Angular", logo: "/images/stack/angular.png" },
   { name: "mysql", logo: "/images/stack/mysql.png" },
   { name: "MariaDB", logo: "/images/stack/mariadb.png" },
-  { name: "Git", logo: "/images/stack/git.png" },
-  { name: "Gradle", logo: "/images/stack/gradle.png" },
-  { name: "Docker", logo: "/images/stack/docker.png" },
+  { name: "Postgre", logo: "/images/stack/postgre.png" },
+  { name: "MongoDB", logo: "/images/stack/mongo.png" },
+  { name: "Jenkins", logo: "/images/stack/jenkins.png" },
   { name: "Open Api", logo: "/images/stack/openapi.png" },
+  { name: "Git", logo: "/images/stack/git.png" },
+  { name: "Docker", logo: "/images/stack/docker.png" },
   { name: "Kafka", logo: "/images/stack/kafka.webp" },
-  { name: "Redis", logo: "/images/stack/redis.png" },
-  { name: "MapStruct", logo: "/images/stack/mapstruct.png" },
-  { name: "Angular", logo: "/images/stack/angular.png" },
-  { name: "TypeScript", logo: "/images/stack/ts.png" },
+  { name: "Redis", logo: "/images/stack/redis.png" }
 ];
 ---
 
-<section class="py-12">
+<section class="py-12 px-4 sm:px-6 lg:px-8">
   <h2 class="text-3xl font-bold text-center mb-6 text-gray-900 dark:text-white">
     Tech Stack
   </h2>
-  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-8 justify-items-center">
-    {techStack.map((tech) => (
-      <div class="flex flex-col items-center text-center">
-        <img src={tech.logo} alt={tech.name} class="w-16 h-16 object-contain mb-2" />
-        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{tech.name}</span>
-      </div>
-    ))}
+  
+  <div class="mx-auto max-w-7xl">
+    <div class="flex flex-wrap justify-center gap-6 sm:gap-8">
+      {techStack.map((tech) => (
+        <div class="w-[calc(50%-12px)] sm:w-[calc(33.333%-16px)] md:w-[calc(25%-18px)] lg:w-[calc(20%-20px)] xl:w-[calc(12.5%-22px)]">
+          <div class="flex flex-col items-center text-center h-full">
+            <img 
+              src={tech.logo} 
+              alt={tech.name} 
+              class="w-14 h-14 sm:w-16 sm:h-16 object-contain mb-2"
+            />
+            <span class="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
+              {tech.name}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
