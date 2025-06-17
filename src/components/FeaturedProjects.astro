@@ -1,11 +1,18 @@
 ---
-import Pheader from './common/Pheader.astro';
+import Pheader from "./common/Pheader.astro";
 
-const techList = ["java", "kotlin", "mariadb", "mongodb", "spigot", "maven"] as const;
-type Tech = typeof techList[number];
+const techList = [
+  "java",
+  "kotlin",
+  "mariadb",
+  "mongodb",
+  "spigot",
+  "maven",
+] as const;
+type Tech = (typeof techList)[number];
 
 export interface Props {
-  limit?: number;        // opcional
+  limit?: number; // opcional
 }
 
 const { limit } = Astro.props;
@@ -24,43 +31,46 @@ const projects: Project[] = [
     description: "Minecraft server plugin for a global trade shop system.",
     image: "/images/projects/wwtshop.png",
     link: "https://github.com/RedRiotTank/WorldWideTrade",
-    technologies: ["kotlin", "mariadb", "spigot"]
+    technologies: ["kotlin", "mariadb", "spigot"],
   },
   {
     title: "Layered Structures",
-    description: "Minecraft server & library for creating programmable structures by layers.",
+    description:
+      "Minecraft server & library for creating programmable structures by layers.",
     image: "/images/projects/LayeredStructures.png",
     link: "https://github.com/RedRiotTank/LayeredStructures",
-    technologies: ["java", "spigot"]
+    technologies: ["java", "spigot"],
   },
   {
     title: "RedBlockChain-Core",
     description: "My own blockchain implementation in Java.",
     image: "/images/projects/blockchain.jpg",
     link: "https://github.com/RedRiotTank/RedBlockChain-core",
-    technologies: ["java","maven", "mongodb"]
+    technologies: ["java", "maven", "mongodb"],
   },
   {
     title: "Htt genetic Algorithms",
-    description: "Java library for genetic algorithms with a focus on flexibility.",
+    description:
+      "Java library for genetic algorithms with a focus on flexibility.",
     image: "/images/projects/genetic.png",
     link: "https://github.com/RedRiotTank/HTTGeneticAlgorithms",
-    technologies: ["java", "maven"]
+    technologies: ["java", "maven"],
   },
   {
     title: "One Piece Habs",
     description: "Minecraft server plugin to recreate One Piece abilities.",
     image: "/images/projects/ophabs.jpg",
     link: "https://github.com/HTTplugins/OPhabs",
-    technologies: ["java", "spigot"]
+    technologies: ["java", "spigot"],
   },
   {
     title: "Random Critical",
-    description: "A Minecraft server plugin that randomizes critical hits and their particle effects.",
+    description:
+      "A Minecraft server plugin that randomizes critical hits and their particle effects.",
     image: "/images/projects/randomcritical.png",
     link: "https://github.com/RedRiotTank/RandomCritical",
-    technologies: ["java", "spigot"]
-  }
+    technologies: ["java", "spigot"],
+  },
 ];
 
 const displayedProjects = limit ? projects.slice(0, limit) : projects;
@@ -71,55 +81,54 @@ const techIcons: Record<Tech, string> = {
   mariadb: "/images/stack/mariadb.png",
   mongodb: "/images/stack/mongodb.png",
   spigot: "/images/stack/spigot.png",
-  maven: "/images/stack/maven.png"
+  maven: "/images/stack/maven.png",
 };
-
 
 var text = limit
   ? "A selection of my favorite work"
   : "Some of the projects I've worked on";
-
-
-
 ---
 
 <section class="py-10">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto px-4">
     <Pheader text={text} />
     <h3 class="text-4xl font-bold text-center text-white mb-12">
       {text}
     </h3>
 
-    <div class="grid md:grid-cols-3 gap-8">
-      {displayedProjects.map((project) => (
-        <a
-          href={project.link}
-          class="relative block bg-gray-900 rounded-2xl overflow-hidden shadow-lg transition hover:shadow-pink-600/30 hover:scale-[1.01] duration-300 min-h-[350px]"
-        >
-          <img
-            src={project.image}
-            alt={project.title}
-            class="w-full h-48 object-cover"
-          />
-          <div class="p-6 pb-16">
-            <h4 class="text-xl font-semibold text-white mb-2">{project.title}</h4>
-            <p class="text-gray-300">{project.description}</p>
-          </div>
-
-          {project.technologies && (
-            <div class="absolute bottom-6 right-6 flex gap-2 flex-wrap justify-end">
-              {project.technologies.map((tech) => (
-                <img
-                  src={techIcons[tech]}
-                  alt={tech}
-                  title={tech}
-                  class="w-6 h-6 opacity-80 hover:opacity-100 transition"
-                />
-              ))}
+    <div class="grid xl:grid-cols-3 gap-8">
+      {
+        displayedProjects.map((project) => (
+          <a
+            href={project.link}
+            class="relative block bg-gray-900 rounded-2xl overflow-hidden shadow-lg transition hover:shadow-pink-600/30 hover:scale-[1.01] duration-300 min-h-[350px]">
+            <img
+              src={project.image}
+              alt={project.title}
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6 pb-16">
+              <h4 class="text-xl font-semibold text-white mb-2">
+                {project.title}
+              </h4>
+              <p class="text-gray-300">{project.description}</p>
             </div>
-          )}
-        </a>
-      ))}
+
+            {project.technologies && (
+              <div class="absolute bottom-6 right-6 flex gap-2 flex-wrap justify-end">
+                {project.technologies.map((tech) => (
+                  <img
+                    src={techIcons[tech]}
+                    alt={tech}
+                    title={tech}
+                    class="w-6 h-6 opacity-80 hover:opacity-100 transition"
+                  />
+                ))}
+              </div>
+            )}
+          </a>
+        ))
+      }
     </div>
   </div>
 </section>

@@ -19,31 +19,33 @@ const techStack = [
   { name: "Git", logo: "/images/stack/git.png" },
   { name: "Docker", logo: "/images/stack/docker.png" },
   { name: "Kafka", logo: "/images/stack/kafka.webp" },
-  { name: "Redis", logo: "/images/stack/redis.png" }
+  { name: "Redis", logo: "/images/stack/redis.png" },
 ];
 ---
 
-<section class="py-12 px-4 sm:px-6 lg:px-8">
+<section class="py-12 px-4">
   <h2 class="text-3xl font-bold text-center mb-6 text-gray-900 dark:text-white">
     Tech Stack
   </h2>
-  
+
   <div class="mx-auto max-w-7xl">
     <div class="flex flex-wrap justify-center gap-6 sm:gap-8">
-      {techStack.map((tech) => (
-        <div class="w-[calc(50%-12px)] sm:w-[calc(33.333%-16px)] md:w-[calc(25%-18px)] lg:w-[calc(20%-20px)] xl:w-[calc(12.5%-22px)]">
-          <div class="flex flex-col items-center text-center h-full">
-            <img 
-              src={tech.logo} 
-              alt={tech.name} 
-              class="w-14 h-14 sm:w-16 sm:h-16 object-contain mb-2"
-            />
-            <span class="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
-              {tech.name}
-            </span>
+      {
+        techStack.map((tech) => (
+          <div class="w-[calc(33.333%-12px)] sm:w-[calc(33.333%-16px)] md:w-[calc(25%-18px)] lg:w-[calc(20%-20px)] xl:w-[calc(12.5%-22px)]">
+            <div class="flex flex-col items-center text-center h-full">
+              <img
+                src={tech.logo}
+                alt={tech.name}
+                class="w-14 h-14 sm:w-16 sm:h-16 object-contain mb-2"
+              />
+              <span class="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
+                {tech.name}
+              </span>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>

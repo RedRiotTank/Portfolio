@@ -1,39 +1,50 @@
 ---
-import Contact from "./Contact.astro"
-import FeaturedProjects from "./FeaturedProjects.astro"
-import Pheader from "./common/Pheader.astro"
-import Resume from "./Resume.astro"
-import TechStack from "./TechStack.astro"
+import Contact from "./Contact.astro";
+import FeaturedProjects from "./FeaturedProjects.astro";
+import Pheader from "./common/Pheader.astro";
+import Resume from "./Resume.astro";
+import TechStack from "./TechStack.astro";
 ---
 
 <section class="py-5 text-center md:text-left">
-  <Pheader text="HEY, I'M ALBERTO" align="left"/>
+  <Pheader text="HEY, I'M ALBERTO" align="left" />
   <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
     I build & design
     <br class="hidden sm:block" />
     scalable backend systems
   </h1>
 
-  <p class="text-xl text-gray-300 max-w-2xl mx-auto md:mx-0">
-    Java/Spring Boot specialist crafting fintech solutions. Focused on clean architecture and high-performance APIs.
+  <p class="text-xl text-gray-300 max-w-2xl md:mx-0 px-4">
+    Java/Spring Boot specialist crafting fintech solutions. Focused on clean
+    architecture and high-performance APIs.
   </p>
 
-  <div class="mt-8 flex flex-row flex-wrap gap-4 justify-center md:justify-start items-center">
-    <a href="#contact" class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-medium transition whitespace-nowrap">
+  <div
+    class="mt-8 flex flex-row flex-wrap gap-4 justify-center md:justify-start items-center"
+  >
+    <a
+      href="#contact"
+      class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-medium transition whitespace-nowrap"
+    >
       Get in touch
     </a>
-    <a href="/projects" class="border border-gray-600 hover:border-pink-500 text-gray-300 px-6 py-3 rounded-lg font-medium transition whitespace-nowrap">
+    <a
+      href="/projects"
+      class="border border-gray-600 hover:border-pink-500 text-gray-300 px-6 py-3 rounded-lg font-medium transition whitespace-nowrap"
+    >
       See my work
     </a>
   </div>
 </section>
 
-<section class="flex flex-col md:flex-row flex-wrap gap-8 mt-16 items-start justify-between">
-  <div class="w-full md:w-[48%]">
+<section
+  class="flex flex-col xl:flex-row gap-8 mt-16 items-center xl:items-start justify-between"
+>
+  <div class="w-full xl:w-[48%]">
     <Resume />
   </div>
-  <div class="w-full md:w-[48%]">
-  <Contact />
+  <div>
+    <Contact />
   </div>
 </section>
 
