@@ -10,9 +10,11 @@ import "../styles/global.css";
     <title>Alberto | Backend Engineer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="bg-[#0d1117] text-white font-sans">
+  <body class="bg-[#0d1117] text-white font-sans min-h-screen flex flex-col">
     <Header />
-    <slot />
+    <main class="flex-grow">
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>
