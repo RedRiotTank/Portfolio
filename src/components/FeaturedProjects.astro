@@ -3,11 +3,13 @@ import Pheader from "./common/Pheader.astro";
 
 const techList = [
   "java",
+  "springboot",
   "kotlin",
   "mariadb",
   "mongodb",
   "spigot",
   "maven",
+  "panama",
 ] as const;
 type Tech = (typeof techList)[number];
 
@@ -27,11 +29,12 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: "World Wide Trade Shop",
-    description: "Minecraft server plugin for a global trade shop system.",
-    image: "/images/projects/wwtshop.png",
-    link: "https://github.com/RedRiotTank/WorldWideTrade",
-    technologies: ["kotlin", "mariadb", "spigot"],
+    title: "Pseudorandomometric Sequences Api",
+    description:
+      "A self-hosted Spring Boot REST API built with Kotlin to generate parameterizable pseudo-random number sequences across various statistical distributions.",
+    image: "/images/projects/PseudorandomometricSequencesApi.png",
+    link: "https://github.com/RedRiotTank/PseudorandomometricSequencesApi",
+    technologies: ["kotlin", "springboot"],
   },
   {
     title: "Layered Structures",
@@ -42,19 +45,26 @@ const projects: Project[] = [
     technologies: ["java", "spigot"],
   },
   {
+    title: "Native Json Navigator",
+    description:
+      "A high-performance Java 21 JSON navigator that operates directly on off-heap memory using bit-packed primitive pointers via Project Panama.",
+    image: "/images/projects/nativejsonnavigator.png",
+    link: "https://github.com/RedRiotTank/NativeJsonNavigator",
+    technologies: ["java", "panama"],
+  },
+  {
+    title: "World Wide Trade Shop",
+    description: "Minecraft server plugin for a global trade shop system.",
+    image: "/images/projects/wwtshop.png",
+    link: "https://github.com/RedRiotTank/WorldWideTrade",
+    technologies: ["kotlin", "mariadb", "spigot"],
+  },
+  {
     title: "RedBlockChain-Core",
     description: "My own blockchain implementation in Java.",
     image: "/images/projects/blockchain.jpg",
     link: "https://github.com/RedRiotTank/RedBlockChain-core",
     technologies: ["java", "maven", "mongodb"],
-  },
-  {
-    title: "Htt genetic Algorithms",
-    description:
-      "Java library for genetic algorithms with a focus on flexibility.",
-    image: "/images/projects/genetic.png",
-    link: "https://github.com/RedRiotTank/HTTGeneticAlgorithms",
-    technologies: ["java", "maven"],
   },
   {
     title: "One Piece Habs",
@@ -77,11 +87,13 @@ const displayedProjects = limit ? projects.slice(0, limit) : projects;
 
 const techIcons: Record<Tech, string> = {
   java: "/images/stack/java.png",
+  springboot: "/images/stack/springboot.svg",
   kotlin: "/images/stack/kotlin.png",
   mariadb: "/images/stack/mariadb.png",
   mongodb: "/images/stack/mongodb.png",
   spigot: "/images/stack/spigot.png",
   maven: "/images/stack/maven.png",
+  panama: "/images/stack/panama.png",
 };
 
 var text = limit
@@ -101,7 +113,8 @@ var text = limit
         displayedProjects.map((project) => (
           <a
             href={project.link}
-            class="relative block bg-gray-900 rounded-2xl overflow-hidden shadow-lg transition hover:shadow-pink-600/30 hover:scale-[1.01] duration-300 min-h-[350px]">
+            class="relative block bg-gray-900 rounded-2xl overflow-hidden shadow-lg transition hover:shadow-pink-600/30 hover:scale-[1.01] duration-300 min-h-[350px]"
+          >
             <img
               src={project.image}
               alt={project.title}
