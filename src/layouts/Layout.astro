@@ -9,12 +9,14 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <title>Alberto | Backend Engineer</title>
+    <link rel="icon" type="image/x-icon" href="public/images/favicon.ico" />
     <ClientRouter />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body
     class="bg-[#0d1117] text-white font-sans min-h-screen flex flex-col"
-    transition:animate={fade({ duration: "0.4s" })}>
+    transition:animate={fade({ duration: "0.4s" })}
+  >
     <Header />
     <main class="flex-grow">
       <slot />
