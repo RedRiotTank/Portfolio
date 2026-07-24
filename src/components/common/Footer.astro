@@ -1,27 +1,41 @@
+---
+import {
+  getLangFromUrl,
+  useTranslations,
+  translatePath,
+} from "../../utils/i18n";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
 <footer class="bg-white shadow-sm dark:bg-gray-800">
   <div
-    class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
-      >© 2025 Alberto Plaza Montes. All Rights Reserved.
+    class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between"
+  >
+    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+      {t("footer.rights")}
     </span>
     <ul
-      class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+      class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0"
+    >
       <li>
-        <a href="/about" class="hover:underline me-4 md:me-6">About</a>
+        <a
+          href={translatePath("/about", lang)}
+          class="hover:underline me-4 md:me-6">{t("footer.about")}</a>
       </li>
       <li>
-        <a href="/PrivacyPolicy" class="hover:underline me-4 md:me-6"
-          >Privacy Policy</a
-        >
+        <a
+          href={translatePath("/PrivacyPolicy", lang)}
+          class="hover:underline me-4 md:me-6">{t("footer.privacy")}</a>
       </li>
       <li>
         <a
           href="https://github.com/RedRiotTank/Portfolio/blob/main/LICENSE"
-          class="hover:underline me-4 md:me-6">Licensing</a
-        >
+          class="hover:underline me-4 md:me-6">{t("footer.licensing")}</a>
       </li>
       <li>
-        <a href="/#contact" class="hover:underline">Contact</a>
+        <a href={translatePath("/#contact", lang)} class="hover:underline"
+          >{t("footer.contact")}</a>
       </li>
     </ul>
   </div>

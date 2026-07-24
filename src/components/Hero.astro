@@ -4,38 +4,45 @@ import FeaturedProjects from "./FeaturedProjects.astro";
 import Pheader from "./common/Pheader.astro";
 import Resume from "./Resume.astro";
 import TechStack from "./TechStack.astro";
+import { getLangFromUrl, useTranslations, translatePath } from "../utils/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="py-5 text-center md:text-left">
-  <Pheader text="HEY, I'M ALBERTO" align="left" />
+  <Pheader text={t("hero.greeting")} align="left" />
   <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
-    I build & design
+    {t("hero.title1")}
     <br class="hidden sm:block" />
-    scalable backend systems
+    {t("hero.title2")}
   </h1>
 
   <p class="text-xl text-gray-300 max-w-2xl md:mx-0">
-    Java/Spring Boot specialist crafting fintech solutions. Focused on clean
-    architecture and high-performance APIs.
+    {t("hero.desc")}
   </p>
 
   <div
-    class="mt-8 flex flex-row flex-wrap gap-4 justify-center md:justify-start items-center">
+    class="mt-8 flex flex-row flex-wrap gap-4 justify-center md:justify-start items-center"
+  >
     <a
       href="#contact"
-      class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-medium transition whitespace-nowrap">
-      Get in touch
+      class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-medium transition whitespace-nowrap"
+    >
+      {t("hero.btn.contact")}
     </a>
     <a
-      href="/projects"
-      class="border border-gray-600 hover:border-pink-500 text-gray-300 px-6 py-3 rounded-lg font-medium transition whitespace-nowrap">
-      See my work
+      href={translatePath("/projects", lang)}
+      class="border border-gray-600 hover:border-pink-500 text-gray-300 px-6 py-3 rounded-lg font-medium transition whitespace-nowrap"
+    >
+      {t("hero.btn.work")}
     </a>
   </div>
 </section>
 
 <section
-  class="flex flex-col xl:flex-row gap-8 mt-16 items-center xl:items-start justify-between">
+  class="flex flex-col xl:flex-row gap-8 mt-16 items-center xl:items-start justify-between"
+>
   <div class="w-full xl:w-[48%]">
     <Resume />
   </div>

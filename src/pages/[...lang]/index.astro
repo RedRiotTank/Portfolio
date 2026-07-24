@@ -1,0 +1,20 @@
+---
+import { languages, defaultLang } from "../../utils/i18n";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({
+    params: { lang: lang === defaultLang ? undefined : lang },
+  }));
+}
+
+import Hero from "../../components/Hero.astro";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout>
+  <div
+    class="w-auto sm:w-[895px] xl:w-[1280px] flex flex-col items-center bg-[#0d1117] text-white mx-auto"
+  >
+    <Hero />
+  </div>
+</Layout>

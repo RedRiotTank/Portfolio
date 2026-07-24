@@ -1,5 +1,9 @@
 ---
 import Pheader from "./common/Pheader.astro";
+import { getLangFromUrl, useTranslations } from "../utils/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const techList = [
   "java",
@@ -14,7 +18,7 @@ const techList = [
 type Tech = (typeof techList)[number];
 
 export interface Props {
-  limit?: number; // opcional
+  limit?: number;
 }
 
 const { limit } = Astro.props;
@@ -30,53 +34,49 @@ type Project = {
 const projects: Project[] = [
   {
     title: "Pseudorandomometric Sequences Api",
-    description:
-      "A self-hosted Spring Boot REST API built with Kotlin to generate parameterizable pseudo-random number sequences across various statistical distributions.",
+    description: t("projects.p1.desc"),
     image: "/images/projects/PseudorandomometricSequencesApi.png",
     link: "https://github.com/RedRiotTank/PseudorandomometricSequencesApi",
     technologies: ["kotlin", "springboot"],
   },
   {
     title: "Layered Structures",
-    description:
-      "Minecraft server & library for creating programmable structures by layers.",
+    description: t("projects.p2.desc"),
     image: "/images/projects/LayeredStructures.png",
     link: "https://github.com/RedRiotTank/LayeredStructures",
     technologies: ["java", "spigot"],
   },
   {
     title: "Native Json Navigator",
-    description:
-      "A high-performance Java 21 JSON navigator that operates directly on off-heap memory using bit-packed primitive pointers via Project Panama.",
+    description: t("projects.p3.desc"),
     image: "/images/projects/nativejsonnavigator.png",
     link: "https://github.com/RedRiotTank/NativeJsonNavigator",
     technologies: ["java", "panama"],
   },
   {
     title: "World Wide Trade Shop",
-    description: "Minecraft server plugin for a global trade shop system.",
+    description: t("projects.p4.desc"),
     image: "/images/projects/wwtshop.png",
     link: "https://github.com/RedRiotTank/WorldWideTrade",
     technologies: ["kotlin", "mariadb", "spigot"],
   },
   {
     title: "RedBlockChain-Core",
-    description: "My own blockchain implementation in Java.",
+    description: t("projects.p5.desc"),
     image: "/images/projects/blockchain.jpg",
     link: "https://github.com/RedRiotTank/RedBlockChain-core",
     technologies: ["java", "maven", "mongodb"],
   },
   {
     title: "One Piece Habs",
-    description: "Minecraft server plugin to recreate One Piece abilities.",
+    description: t("projects.p6.desc"),
     image: "/images/projects/ophabs.jpg",
     link: "https://github.com/HTTplugins/OPhabs",
     technologies: ["java", "spigot"],
   },
   {
     title: "Random Critical",
-    description:
-      "A Minecraft server plugin that randomizes critical hits and their particle effects.",
+    description: t("projects.p7.desc"),
     image: "/images/projects/randomcritical.png",
     link: "https://github.com/RedRiotTank/RandomCritical",
     technologies: ["java", "spigot"],
@@ -96,9 +96,7 @@ const techIcons: Record<Tech, string> = {
   panama: "/images/stack/panama.png",
 };
 
-var text = limit
-  ? "A selection of my favorite work"
-  : "Some of the projects I've worked on";
+var text = limit ? t("projects.selection") : t("projects.some");
 ---
 
 <section class="py-10">
