@@ -1,37 +1,80 @@
 ---
-// Props
 const {
   logo,
   alt,
   title,
   subtitle = "",
-  startDate,
-  endDate,
+  dateRange,
   isOngoing = false,
   description,
+  type = "MILESTONE",
+  duration,
+  badgeColor = "bg-indigo-950 text-indigo-300 border-indigo-800",
+  isFluid = false,
 } = Astro.props;
-
-// Render date range
-const dateRange = isOngoing ? `${startDate} – Present` : `${startDate} – ${endDate}`;
 ---
 
+<div
+  class={`relative p-4 bg-gradient-to-br from-gray-900/95 to-gray-950/95 border border-gray-800 rounded-xl shadow-xl backdrop-blur-md transition-all duration-300 group flex flex-col justify-between ${isFluid ? "h-full" : "h-[110px] hover:h-auto hover:z-30 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] hover:border-indigo-500"}`}
+>
+  <div>
+    <!-- Cabecera de la tarjeta con Logo e insignia -->
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="flex items-center space-x-2">
+        <img
+          src={logo}
+          alt={alt}
+          class="w-6 h-6 object-cover rounded-full border border-gray-700"
+        />
+        <span
+          class={`text-[9px] font-mono font-bold px-2 py-0.5 rounded-full border ${badgeColor}`}
+        >
+          {type}
+        </span>
+      </div>
+      <span class="text-[11px] font-mono text-indigo-400 font-semibold">
+        [{dateRange}]
+      </span>
+    </div>
 
-<li class="mb-10 relative ps-16 max-w-full">
-  <span class="absolute top-0 left-0 flex items-center justify-center w-10 h-10 bg-white rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-gray-800">
-    <img src={logo} alt={alt} class="w-full h-full object-cover rounded-full" />
-  </span>
+    <!-- Título y Subtítulo -->
+    <h3
+      class="text-sm font-bold text-white group-hover:text-indigo-300 transition-colors leading-snug"
+    >
+      {title}
+    </h3>
+    {
+      subtitle && (
+        <p class="text-[11px] font-mono text-gray-400 mb-1">{subtitle}</p>
+      )
+    }
 
-  <h3 class="mb-1 text-lg font-semibold text-gray-900 dark:text-white">
-    {title}
-  </h3>
-  {subtitle && (
-    <p class="text-sm text-gray-400 dark:text-gray-500 mb-1">{subtitle}</p>
-  )}
-  <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-    {dateRange}
-  </time>
-  <p class="text-base font-normal text-gray-500 dark:text-gray-400">
-    {description}
-  </p>
-</li>
+    <!-- Descripción: En estado normal está truncada a 1 línea; al hacer hover se muestra entera -->
+    <p
+      class="text-xs text-gray-300 leading-relaxed font-sans mt-1.5 line-clamp-1 group-hover:line-clamp-none transition-all"
+    >
+      {description}
+    </p>
+  </div>
 
+  <!-- Pie de tarjeta estilo HUD -->
+  <div
+    class="mt-3 pt-2 border-t border-gray-800/80 flex items-center justify-between text-[10px] font-mono text-gray-500"
+  >
+    <span
+      >STATUS: <strong class="text-gray-300"
+        >{isOngoing ? "IN_PROGRESS" : "COMPLETED"}</strong
+      ></span
+    >
+    <div class="flex items-center space-x-2">
+      <span class="text-indigo-400/70 group-hover:hidden text-[9px]"
+        >// HOVER TO EXPAND</span
+      >
+      {
+        duration && (
+          <span class="text-indigo-400/80 font-bold">// {duration}</span>
+        )
+      }
+    </div>
+  </div>
+</div>

@@ -1,49 +1,208 @@
 ---
-import TimelineItem from './TimelineItem.astro';
+import TimelineItem from "./TimelineItem.astro";
 ---
 
-<div class="max-w-3xl mx-auto px-4">
-    <ol class="relative border-s border-gray-200 dark:border-gray-700">
+<div class="w-full max-w-5xl mx-auto px-4 py-10 mb-16">
+  <!-- Cabecera de la sección -->
+  <div class="text-center mb-16">
+    <span
+      class="inline-block px-3 py-1 mb-3 text-xs font-mono font-semibold tracking-wider text-indigo-400 uppercase bg-indigo-950/60 border border-indigo-800/50 rounded-full shadow-inner"
+    >
+      // PROPORTIONAL_CHRONO_MAP
+    </span>
+    <h2
+      class="text-2xl md:text-3xl font-bold tracking-tight text-white font-mono"
+    >
+      Career & Education Matrix
+    </h2>
+    <p class="text-sm text-gray-400 mt-2">
+      True-scale temporal mapping (2026 – 2020).
+    </p>
+  </div>
 
-        <TimelineItem
-            logo="/images/ugr_logo.png"
-            alt="UGR"
-            title="M.Sc. in Computer Science & Engineering"
-            subtitle="University of Granada · Spain"
-            startDate="Sep 2024"
-            endDate="Present"
-            description="Specialization in Software Engineering. Projects in web development, algorithms, and data structures. Graduated with solid foundations in computer science."
-        />
+  <!-- VERSIÓN MÓVIL (Flujo vertical limpio) -->
+  <div class="block md:hidden space-y-6">
+    <TimelineItem
+      logo="/images/keifi_logo.png"
+      alt="Keifi"
+      title="Software Engineer at Keifi by Izertis"
+      dateRange="Jun 2024 – Present"
+      isOngoing={true}
+      type="MAIN QUEST"
+      description="Building scalable microservices and REST APIs using Java and Spring Boot with DDD architecture."
+    />
+    <TimelineItem
+      logo="/images/ugr_logo.png"
+      alt="UGR"
+      title="M.Sc. in Computer Science & Engineering"
+      dateRange="Sep 2024 – Feb 2026"
+      type="EDUCATION"
+      description="Specialization in Software Engineering. Advanced projects in web development and algorithms."
+    />
+    <TimelineItem
+      logo="/images/keifi_logo.png"
+      alt="Keifi Intern"
+      title="Software Engineer Intern"
+      dateRange="Jun 2023 – Dec 2023"
+      type="SIDE QUEST"
+      description="Developed microservices using Java/Spring Boot & built UX/UI using Angular."
+    />
+    <TimelineItem
+      logo="/images/ugr_logo.png"
+      alt="UGR Course"
+      title="ML y Big Data para la Bioinformática"
+      dateRange="Apr 2023"
+      type="CERTIFICATION"
+      description="Specialized training on machine learning models and data analysis pipelines."
+    />
+    <TimelineItem
+      logo="/images/ugr_logo.png"
+      alt="UGR Course"
+      title="Información Digital: Representación y codificación"
+      dateRange="Oct 2022"
+      type="CERTIFICATION"
+      description="Deep dive into data representation, encoding algorithms, and information theory fundamentals."
+    />
+    <TimelineItem
+      logo="/images/ugr_logo.png"
+      alt="UGR"
+      title="B.Sc. in Computer Science & Engineering"
+      dateRange="Sep 2020 – Jun 2024"
+      type="ROOT NODE"
+      description="Studied core topics in computer science and engineering, mathematics, algorithms, and systems design."
+    />
+  </div>
 
-        <TimelineItem
-            logo="/images/keifi_logo.png"
-            alt="Keifi"
-            title="Software Engineer at Keifi by Izertis"
-            subtitle="Hybrid · Spain"
-            startDate="Jun 2024"
-            endDate="Present"
-            isOngoing={true}
-            description="Building & designing scalable microservices and REST APIs using Java and Spring Boot with a DDD architecture. Building CI/CD pipelines with Jenkins and Docker. Collaborating with cross-functional teams to deliver high-quality software solutions."
-        />
+  <!-- VERSIÓN ESCRITORIO (Lienzo Proporcional Ordenado) -->
+  <div class="hidden md:block relative w-full h-[1050px] mt-10">
+    <!-- Eje central continuo -->
+    <div
+      class="absolute border-2 border-dashed border-indigo-500/30 h-full left-1/2 transform -translate-x-1/2 top-0"
+    >
+    </div>
 
-        <TimelineItem
-            logo="/images/keifi_logo.png"
-            alt="Keifi Intern"
-            title="Software Engineer Intern at Keifi Technologies"
-            subtitle="Hybrid · Spain"
-            startDate="Jun 2023"
-            endDate="Dec 2023"
-            description="Developed microservices using Java and Spring Boot & built UX/UI using Angular for financial clients. Integrated external systems, built REST APIs, and worked with CI/CD tools like Jenkins and Docker."
-        />
+    <!-- Nodos de tiempo en el eje central -->
+    <div
+      class="absolute left-1/2 transform -translate-x-1/2 -top-4 flex items-center justify-center w-12 h-12 bg-gray-900 border-2 border-indigo-500 rounded-full shadow-[0_0_20px_rgba(99,102,241,0.6)] z-20 animate-pulse"
+    >
+      <span class="text-[10px] font-mono font-bold text-indigo-300">NOW</span>
+    </div>
+    <div
+      class="absolute left-1/2 transform -translate-x-1/2 top-[320px] flex items-center justify-center w-10 h-10 bg-gray-900 border-2 border-amber-500/70 rounded-full shadow-lg z-20"
+    >
+      <span class="text-[9px] font-mono text-amber-300">2024</span>
+    </div>
+    <div
+      class="absolute left-1/2 transform -translate-x-1/2 top-[550px] flex items-center justify-center w-10 h-10 bg-gray-900 border-2 border-blue-500/70 rounded-full shadow-lg z-20"
+    >
+      <span class="text-[9px] font-mono text-blue-300">2023</span>
+    </div>
+    <div
+      class="absolute left-1/2 transform -translate-x-1/2 top-[800px] flex items-center justify-center w-10 h-10 bg-gray-900 border-2 border-cyan-500/70 rounded-full shadow-lg z-20"
+    >
+      <span class="text-[9px] font-mono text-cyan-300">2022</span>
+    </div>
+    <div
+      class="absolute left-1/2 transform -translate-x-1/2 bottom-0 flex items-center justify-center w-10 h-10 bg-gray-900 border-2 border-amber-500 rounded-full shadow-lg z-20"
+    >
+      <span class="text-[9px] font-mono text-amber-300">2020</span>
+    </div>
 
-        <TimelineItem
-            logo="/images/ugr_logo.png"
-            alt="UGR"
-            title="B.Sc. in Computer Science & Engineering"
-            subtitle="University of Granada · Spain"
-            startDate="Sep 2020"
-            endDate="Jun 2024"
-            description="Studied core topics in computer science and engineering, including mathematics, algorithms, and systems design. Built strong programming skills in Java, Python, and C++. Gained experience in teamwork and communication through group projects and presentations. Specialized in Information Systems and database management."
-        />
-    </ol>
+    <!-- 1. TRABAJO (Izquierda): Jun 2024 - Presente -->
+    <div class="absolute left-0 w-[46%] top-0 h-[260px]">
+      <TimelineItem
+        logo="/images/keifi_logo.png"
+        alt="Keifi"
+        title="Software Engineer at Keifi by Izertis"
+        subtitle="Hybrid · Spain"
+        dateRange="Jun 2024 – Present"
+        isOngoing={true}
+        type="MAIN QUEST"
+        duration="CURRENT ROLE"
+        badgeColor="bg-emerald-950 text-emerald-300 border-emerald-800"
+        description="Building scalable microservices and REST APIs using Java and Spring Boot with DDD architecture. CI/CD pipelines with Jenkins and Docker."
+        isFluid={true}
+      />
+    </div>
+
+    <!-- 1. MÁSTER (Derecha): Sep 2024 - Feb 2026 -->
+    <div class="absolute right-0 w-[46%] top-[40px] h-[220px]">
+      <TimelineItem
+        logo="/images/ugr_logo.png"
+        alt="UGR"
+        title="M.Sc. in Computer Science & Engineering"
+        subtitle="University of Granada"
+        dateRange="Sep 2024 – Feb 2026"
+        type="EDUCATION"
+        duration="1.5 YEARS"
+        badgeColor="bg-purple-950 text-purple-300 border-purple-800"
+        description="Specialization in Software Engineering. Advanced projects in web development, algorithms, and distributed systems."
+        isFluid={true}
+      />
+    </div>
+
+    <!-- 2. LA BASE DEL GRADO (Izquierda): Sep 2020 - Jun 2024 -->
+    <div class="absolute left-0 w-[46%] top-[320px] h-[700px]">
+      <TimelineItem
+        logo="/images/ugr_logo.png"
+        alt="UGR"
+        title="B.Sc. in Computer Science & Engineering"
+        subtitle="University of Granada"
+        dateRange="Sep 2020 – Jun 2024"
+        type="ROOT NODE"
+        duration="4 YEARS DEGREE"
+        badgeColor="bg-amber-950 text-amber-300 border-amber-800"
+        description="Studied core topics in computer science and engineering, mathematics, algorithms, and systems design. Specialized in Information Systems."
+        isFluid={true}
+      />
+    </div>
+
+    <!-- 3. PRÁCTICAS (Derecha): Jun 2023 - Dic 2023 -->
+    <div class="absolute right-0 w-[46%] top-[380px] h-[150px]">
+      <TimelineItem
+        logo="/images/keifi_logo.png"
+        alt="Keifi Intern"
+        title="Software Engineer Intern"
+        subtitle="Keifi Technologies"
+        dateRange="Jun 2023 – Dec 2023"
+        type="SIDE QUEST"
+        duration="6 MONTHS"
+        badgeColor="bg-blue-950 text-blue-300 border-blue-800"
+        description="Developed microservices using Java/Spring Boot & built UX/UI using Angular for financial clients."
+        isFluid={true}
+      />
+    </div>
+
+    <!-- 3. CURSO ML (Derecha): Abr 2023 -->
+    <div class="absolute right-0 w-[46%] top-[560px] h-[150px]">
+      <TimelineItem
+        logo="/images/ugr_logo.png"
+        alt="UGR Course"
+        title="ML y Big Data para la Bioinformática"
+        subtitle="University of Granada"
+        dateRange="Apr 2023"
+        type="CERTIFICATION"
+        duration="CONCURRENT"
+        badgeColor="bg-cyan-950 text-cyan-300 border-cyan-800"
+        description="Specialized training on machine learning models, data analysis pipelines, and big data techniques."
+        isFluid={true}
+      />
+    </div>
+
+    <!-- 3. CURSO INFO DIGITAL (Derecha): Oct 2022 -->
+    <div class="absolute right-0 w-[46%] top-[760px] h-[150px]">
+      <TimelineItem
+        logo="/images/ugr_logo.png"
+        alt="UGR Course"
+        title="Información Digital: Representación y codificación"
+        subtitle="University of Granada"
+        dateRange="Oct 2022"
+        type="CERTIFICATION"
+        duration="CONCURRENT"
+        badgeColor="bg-cyan-950 text-cyan-300 border-cyan-800"
+        description="Deep dive into data representation, encoding algorithms, and information theory fundamentals."
+        isFluid={true}
+      />
+    </div>
+  </div>
 </div>
