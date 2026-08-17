@@ -1,0 +1,36 @@
+---
+import { languages, getLangFromUrl, getRouteFromUrl } from "../../utils/i18n";
+
+const currentLang = getLangFromUrl(Astro.url);
+---
+
+<div x-data="{ langOpen: false }" class="relative z-50">
+  <button
+    @click="langOpen = !langOpen"
+    class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-800 transition-colors text-2xl focus:outline-none"
+    title="Change Language"
+  >
+    {languages[currentLang].flag}
+  </button>
+
+  <ul
+    x-show="langOpen"
+    @click.away="langOpen = false"
+    x-transition.opacity.duration.200ms
+    class="absolute right-0 mt-2 py-2 w-36 bg-[#161b22] border border-gray-700 rounded-xl shadow-xl z-50"
+    style="display: none;"
+  >
+    {
+      Object.entries(languages).map(([code, { label, flag }]) => (
+        <li>
+          <a
+            href={getRouteFromUrl(Astro.url, code)}
+            class={`flex items-center gap-3 px-4 py-2 text-sm hover:bg-gray-700 transition-colors ${currentLang === code ? "text-pink-500 font-bold" : "text-gray-300"}`}
+          >
+            <span class="text-xl">{flag}</span> {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
