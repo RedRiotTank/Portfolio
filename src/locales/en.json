@@ -11,11 +11,29 @@
   "hero.btn.work": "See my work",
 
   "whoami.title": "WHO AM I?",
-  "whoami.p1": "Hello! I'm <span class=\"text-white font-semibold\">Alberto Plaza Montes</span>, a 23-year-old computer engineer from Spain.",
-  "whoami.p2": "I'm currently pursuing my <span class=\"text-white font-semibold\">Master's degree</span> while working in the <span class=\"text-white font-semibold\">FinTech sector</span> as both a <span class=\"{highlightColor}\">Backend Developer</span> and <span class=\"{highlightColor}\">Software Architect</span>.",
-  "whoami.p3": "In my free time, I'm passionate about personal projects ranging from <span class=\"text-green-400\">Minecraft server plugins</span> to prototyping new <span class=\"text-green-400\">FinTech ideas</span> and similar ventures.",
-  "whoami.p4": "I'm always learning and seeking new challenges that help me grow both professionally and personally.",
+  "whoami.p1": "Hi! I'm <span class=\"text-white font-semibold\">Alberto Plaza Montes</span>, a Computer Science Engineer (M.Sc.) based in Spain.",
+  "whoami.p2": "I work in the <span class=\"text-white font-semibold\">FinTech sector</span> as a <span class=\"{highlightColor}\">Backend Software Engineer</span>, specializing in designing <span class=\"{highlightColor}\">event-driven architectures (DDD)</span>, transactional systems, and high-performance services.",
+  "whoami.p3": "Outside of work, I maintain my own <span class=\"text-green-400\">homelab</span> and build projects focused on <span class=\"text-green-400\">distributed systems, concurrency, and FinTech infrastructure</span>.",
+  "whoami.p4": "I focus on building resilient, scalable software with strict data integrity, adhering to industry standards such as EBA and BIAN.",
 
+  "philosophy.header.title": "ENGINEERING PHILOSOPHY",
+  "philosophy.header.subtitle": "Technical principles and engineering mindset that drive how I design, build, and scale systems.",
+
+  "philosophy.p1.title": "Empirical measurement before optimization",
+  "philosophy.p1.stance": "Zero changes based on guesswork. Before altering code or introducing new tooling, I profile real bottlenecks (JVM, database contention, network latency).",
+  "philosophy.p1.proof": "In practice: Virtual Threads refactoring delivering a 49.8% performance gain and direct SQL query optimization on Mapfre Afín.",
+
+  "philosophy.p2.title": "Radical simplicity & low maintenance overhead",
+  "philosophy.p2.stance": "The best architecture isn't the one with the most patterns, but the simplest one meeting all non-functional requirements. I favor clean, 3:00 AM-debuggable designs over superfluous abstraction layers.",
+  "philosophy.p2.proof": "In practice: Contract-first API design (OpenAPI) and clean boundaries eliminating integration friction without ghost layers.",
+
+  "philosophy.p3.title": "Data invariants & consistency over distributed complexity",
+  "philosophy.p3.stance": "In FinTech, data integrity comes first. The priority is not accumulating microservices, but ensuring accurate balances, idempotent events, and zero corrupted states. If a SQL transaction solves it, skip the distributed complexity.",
+  "philosophy.p3.proof": "In practice: Architecting reconciliation and transitory omnibus accounting systems ensuring 100% consistency.",
+
+  "philosophy.p4.title": "Business impact & fast, safe delivery",
+  "philosophy.p4.stance": "Software only provides value when running reliably in production. Automation (CI/CD, targeted testing) exists to shorten Time-to-Market safely, never for pure dogma.",
+  "philosophy.p4.proof": "In practice: Robust pipelines and test suites enabling rapid iterations and safe deployments in highly regulated environments.",
   "tech.title": "Tech Stack",
 
   "resume.title": "Resume Preview",
@@ -114,5 +132,46 @@
 
   "privpol.contact.title": "Contact Me",
   "privpol.contact.desc": "For any privacy-related questions:",
-  "privpol.contact.email": "Email:"
+  "privpol.contact.email": "Email:",
+
+  "timeline.header.title": "Academic and Professional Matrix",
+  "timeline.header.subtitle": "To-scale temporal mapping (2026 – 2020). Left: Academic | Right: Professional",
+
+  "timeline.job1.title": "Software Engineer at Keifi by Izertis",
+  "timeline.job1.subtitle": "Hybrid · Spain",
+  "timeline.job1.date": "Jun 2024 – Present",
+  "timeline.job1.duration": "CURRENT ROLE",
+  "timeline.job1.desc": "Engineered high-availability fintech infrastructure for major institutions like MAPFRE and Singular Bank using Java, Spring Boot, and Kafka. Applied DDD to accounting systems and optimized payment services using Virtual Threads, improving transaction processing performance by 49.8%.",
+
+  "timeline.master.title": "M.Sc. in Computer Science & Engineering",
+  "timeline.master.subtitle": "University of Granada",
+  "timeline.master.date": "Sep 2024 – Feb 2026",
+  "timeline.master.duration": "1.5 YEARS",
+  "timeline.master.desc": "Advanced specialization in Software Engineering and Distributed Systems. Research focused on designing highly scalable, secure financial API frameworks complying with PSD2/BIAN standards and OAuth2 protocols.",
+
+  "timeline.job2.title": "Software Engineer Intern",
+  "timeline.job2.subtitle": "Keifi Technologies",
+  "timeline.job2.date": "Jun 2023 – Dec 2023",
+  "timeline.job2.duration": "6 MONTHS",
+  "timeline.job2.desc": "Refactored legacy Spring Boot modules and optimized SQL queries to reduce API latency for the Mapfre Afin platform. Researched and implemented secure financial API architectures leveraging OAuth2 and OpenID Connect.",
+
+  "timeline.degree.title": "B.Sc. in Computer Science & Engineering",
+  "timeline.degree.subtitle": "University of Granada",
+  "timeline.degree.date": "Sep 2020 – Jun 2024",
+  "timeline.degree.duration": "4-YEAR DEGREE",
+  "timeline.degree.desc": "Core foundations in computer science, specializing in Information Systems, Advanced Database Management, and Enterprise Systems. Culminated in a Bachelor's Thesis developing a reactive, real-time eSports platform.",
+
+  "timeline.course1.title": "ML and Big Data for Bioinformatics",
+  "timeline.course1.date": "Apr 2023",
+  "timeline.course1.desc": "Applied machine learning and Big Data techniques to biological datasets. Focused on developing predictive models and processing large-scale genomic information pipelines.",
+
+  "timeline.course2.title": "Digital Information: Representation and Coding",
+  "timeline.course2.date": "Oct 2022",
+  "timeline.course2.desc": "Exploration of information theory fundamentals, focusing on how digital data is compressed, and transmitted. Included practical applications of encoding algorithms and data integrity.",
+  "timeline.type.work": "WORK",
+  "timeline.type.internship": "INTERNSHIP",
+  "timeline.type.education": "EDUCATION",
+  "timeline.type.certification": "CERTIFICATION",
+  "timeline.course1.duration": "2 MONTHS",
+  "timeline.course2.duration": "2 MONTHS"
 }

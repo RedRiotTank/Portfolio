@@ -8,11 +8,32 @@
   "hero.desc": "フィンテックソリューションを手掛ける Java/Spring Boot スペシャリスト。クリーンアーキテクチャと高性能 API に注力しています。",
   "hero.btn.contact": "お問い合わせ",
   "hero.btn.work": "実績を見る",
+
   "whoami.title": "自己紹介",
-  "whoami.p1": "こんにちは！スペイン出身の23歳のコンピュータエンジニア、<span class=\"text-white font-semibold\">アルベルト・プラサ・モンテス</span>です。",
-  "whoami.p2": "現在は<span class=\"text-white font-semibold\">修士号</span>を取得中でありながら、<span class=\"text-white font-semibold\">フィンテック分野</span>で<span class=\"{highlightColor}\">バックエンド開発者</span>および<span class=\"{highlightColor}\">ソフトウェアアーキテクト</span>として働いています。",
-  "whoami.p3": "趣味では、<span class=\"text-green-400\">Minecraftのサーバープラグイン</span>の開発から新しい<span class=\"text-green-400\">フィンテックアイデア</span>のプロトタイピングまで、さまざまな個人プロジェクトに情熱を注いでいます。",
-  "whoami.p4": "プロとしても個人的にも成長できるよう、常に学び、新しい挑戦を求めています。",
+  "whoami.p1": "こんにちは！スペインを拠点に活動しているコンピュータサイエンス修士エンジニア（M.Sc.）の <span class=\"text-white font-semibold\">Alberto Plaza Montes</span> です。",
+  "whoami.p2": "<span class=\"text-white font-semibold\">FinTech（金融テクノロジー）分野</span>にて <span class=\"{highlightColor}\">バックエンドソフトウェアエンジニア</span> として従事し、<span class=\"{highlightColor}\">イベント駆動型アーキテクチャ（DDD）</span>、トランザクションシステム、高パフォーマンスサービスの設計を専門としています。",
+  "whoami.p3": "業務外では自前の <span class=\"text-green-400\">Homelab</span> を運用し、<span class=\"text-green-400\">分散システム、並行処理、FinTechインフラ</span> に特化したプロジェクトの開発を行っています。",
+  "whoami.p4": "EBAやBIANなどの業界標準に準拠し、厳格なデータ整合性を備えたスケーラブルで復元力の高いソフトウェアの構築に注力しています。",
+
+  "philosophy.header.title": "エンジニアリング哲学",
+  "philosophy.header.subtitle": "システムの設計・構築・スケーリングにおいて私が重視している技術的原則と価値観。",
+
+  "philosophy.p1.title": "推測ではなく実測に基づく最適化",
+  "philosophy.p1.stance": "推測による最適化は行いません。コード変更や新ツール導入の前に、JVM、DB競合、ネットワーク遅延などの真のボトルネックをプロファイリングします。",
+  "philosophy.p1.proof": "実績：Virtual Threads 導入による 49.8% の性能向上および Mapfre Afín における SQL クエリ最適化。",
+
+  "philosophy.p2.title": "徹底したシンプルさと保守性の追求",
+  "philosophy.p2.stance": "優れたアーキテクチャとは過剰なパターンを持つものではなく、非機能要件を満たす最もシンプルな構成です。深夜3時でも容易にデバッグできる明瞭さを重視します。",
+  "philosophy.p2.proof": "実績：OpenAPI によるコントラクトファースト設計と不要な階層を排除したモジュール化。",
+
+  "philosophy.p3.title": "データ不変性と整合性を最優先",
+  "philosophy.p3.stance": "FinTech においてデータ整合性は絶対です。安易にマイクロサービスを増やすのではなく、残高の正確性とイベントの冪等性を担保します。SQL トランザクションで解決できるなら分散の複雑さは持ち込みません。",
+  "philosophy.p3.proof": "実績：残高調整・照合および中間口座システムにおける 100% の会計データ整合性の実現。",
+
+  "philosophy.p4.title": "ビジネス価値への直結と迅速かつ安全なデリバリー",
+  "philosophy.p4.stance": "ソフトウェアは本番環境で安定稼働して初めて価値を持ちます。自動化（CI/CD、的を絞ったテスト）は教条主義ではなく、安全に Time-to-Market を短縮するために存在します。",
+  "philosophy.p4.proof": "実績：厳格な規制環境下での迅速かつインシデントのないデプロイを支える CI/CD パイプラインとテスト設計。",
+
   "tech.title": "技術スタック",
   "resume.title": "履歴書プレビュー",
   "resume.click": "📄 クリックして履歴書を見る",
@@ -94,5 +115,42 @@
   "privpol.updates.desc": "このポリシーは随時更新される場合があります。",
   "privpol.contact.title": "お問い合わせ",
   "privpol.contact.desc": "プライバシーに関するご質問：",
-  "privpol.contact.email": "メールアドレス："
+  "privpol.contact.email": "メールアドレス：",
+
+  "timeline.header.title": "学歴・職歴マトリックス",
+  "timeline.header.subtitle": "等縮尺のタイムラインマッピング (2026 – 2020)。左: 学歴 | 右: 職歴",
+
+  "timeline.job1.title": "ソフトウェアエンジニア - Keifi by Izertis",
+  "timeline.job1.subtitle": "ハイブリッド · スペイン",
+  "timeline.job1.date": "2024年6月 – 現在",
+  "timeline.job1.duration": "現在の役職",
+  "timeline.job1.desc": "Java、Spring Boot、Kafkaを使用し、MAPFREやSingular Bankなどの主要機関向けに高可用性フィンテックインフラストラクチャを開発。会計システムにDDDを適用し、仮想スレッドで支払い処理を最適化することで、トランザクション処理パフォーマンスを49.8%向上。",
+
+  "timeline.master.title": "コンピュータ工学修士",
+  "timeline.master.subtitle": "グラナダ大学",
+  "timeline.master.date": "2024年9月 – 2026年2月",
+  "timeline.master.duration": "1.5 年",
+  "timeline.master.desc": "ソフトウェアエンジニアリングと分散システムの高度な専門化。PSD2/BIAN標準およびOAuth2プロトコルに準拠した、スケーラビリティが高く安全な金融APIフレームワークの設計に焦点を当てた研究。",
+
+  "timeline.job2.title": "ソフトウェアエンジニア (インターン)",
+  "timeline.job2.subtitle": "Keifi Technologies",
+  "timeline.job2.date": "2023年6月 – 2023年12月",
+  "timeline.job2.duration": "6ヶ月",
+  "timeline.job2.desc": "Mapfre AfinプラットフォームのAPIレイテンシを削減するため、レガシーなSpring Bootモジュールをリファクタリングし、SQLクエリを最適化。OAuth2とOpenID Connectを活用した安全な金融APIアーキテクチャの調査と実装。",
+
+  "timeline.degree.title": "コンピュータ工学学士",
+  "timeline.degree.subtitle": "グラナダ大学",
+  "timeline.degree.date": "2020年9月 – 2024年6月",
+  "timeline.degree.duration": "4年制学士号",
+  "timeline.degree.desc": "情報システム、高度なデータベース管理、およびエンタープライズシステムを専門とするコンピュータサイエンスの基礎。卒業制作として、リアクティブなリアルタイムeスポーツプラットフォームを開発。",
+
+  "timeline.course1.title": "バイオインフォマティクスのためのMLとビッグデータ",
+  "timeline.course1.date": "2023年4月",
+  "timeline.course1.duration": "同時進行",
+  "timeline.course1.desc": "機械学習とビッグデータ技術を生物学的データセットに適用。分析パイプライン、予測モデリング、および大規模なゲノム情報処理の開発に焦点。",
+
+  "timeline.course2.title": "デジタル情報：表現とコーディング",
+  "timeline.course2.date": "2022年10月",
+  "timeline.course2.duration": "同時進行",
+  "timeline.course2.desc": "デジタルデータの圧縮と転送に焦点を当てた情報理論の基礎の探求。コーディングアルゴリズムとデータ整合性の実践的な適用。"
 }

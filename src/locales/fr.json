@@ -8,11 +8,32 @@
   "hero.desc": "Spécialiste Java/Spring Boot créant des solutions fintech. Axé sur une architecture propre et des API haute performance.",
   "hero.btn.contact": "Me contacter",
   "hero.btn.work": "Voir mes projets",
+
   "whoami.title": "QUI SUIS-JE ?",
-  "whoami.p1": "Bonjour ! Je m'appelle <span class=\"text-white font-semibold\">Alberto Plaza Montes</span>, ingénieur en informatique de 23 ans originaire d'Espagne.",
-  "whoami.p2": "Je poursuis actuellement mon <span class=\"text-white font-semibold\">Master</span> tout en travaillant dans le <span class=\"text-white font-semibold\">secteur FinTech</span> en tant que <span class=\"{highlightColor}\">Développeur Backend</span> et <span class=\"{highlightColor}\">Architecte Logiciel</span>.",
-  "whoami.p3": "Pendant mon temps libre, je me passionne pour des projets personnels allant des <span class=\"text-green-400\">plugins de serveurs Minecraft</span> au prototypage de nouvelles <span class=\"text-green-400\">idées FinTech</span>.",
-  "whoami.p4": "J'apprends constamment et recherche de nouveaux défis qui m'aident à grandir professionnellement et personnellement.",
+  "whoami.p1": "Bonjour ! Je m'appelle <span class=\"text-white font-semibold\">Alberto Plaza Montes</span>, Ingénieur en Informatique (M.Sc.) basé en Espagne.",
+  "whoami.p2": "J'évolue dans le <span class=\"text-white font-semibold\">secteur FinTech</span> en tant que <span class=\"{highlightColor}\">Backend Software Engineer</span>, spécialisé dans la conception d'<span class=\"{highlightColor}\">architectures orientées événements (DDD)</span>, de systèmes transactionnels et de services haute performance.",
+  "whoami.p3": "En dehors du travail, j'administre mon propre <span class=\"text-green-400\">homelab</span> et je développe des projets axés sur les <span class=\"text-green-400\">systèmes distribués, la concurrence et l'infrastructure FinTech</span>.",
+  "whoami.p4": "Je me concentre sur la création de logiciels résilients et évolutifs garantissant une intégrité stricte des données, en conformité avec les normes sectorielles telles que l'EBA et BIAN.",
+
+  "philosophy.header.title": "PHILOSOPHIE D'INGÉNIERIE",
+  "philosophy.header.subtitle": "Principes techniques et vision qui guident ma façon de concevoir, bâtir et faire évoluer les systèmes.",
+
+  "philosophy.p1.title": "Mesure empirique avant toute optimisation",
+  "philosophy.p1.stance": "Aucun changement basé sur des suppositions. Avant de modifier le code ou d'ajouter un outil, j'analyse les goulots d'étranglement réels (JVM, contention SQL, latence réseau).",
+  "philosophy.p1.proof": "En pratique : Refactorisation avec Virtual Threads générant +49.8% de performance et optimisation directe de requêtes SQL sur Mapfre Afín.",
+
+  "philosophy.p2.title": "Simplicité radicale et faible coût de maintenance",
+  "philosophy.p2.stance": "La meilleure architecture n'est pas la plus complexe, mais la plus simple répondant aux exigences non fonctionnelles. Je privilégie un code lisible et débogable à 3h du matin plutôt que des abstractions superflues.",
+  "philosophy.p2.proof": "En pratique : Conception d'APIs Contract-First (OpenAPI) et modules clairs réduisant les frictions d'intégration.",
+
+  "philosophy.p3.title": "Intégrité des données et cohérence avant la complexité",
+  "philosophy.p3.stance": "En FinTech, la fiabilité des données prime. L'objectif n'est pas d'empiler des microservices, mais de garantir des soldes justes, des événements idempotents et zéro état corrompu.",
+  "philosophy.p3.proof": "En pratique : Modélisation de systèmes de réconciliation et comptes transitoires garantissant 100% de cohérence comptable.",
+
+  "philosophy.p4.title": "Impact métier et livraison continue et sûre",
+  "philosophy.p4.stance": "Le logiciel n'a de valeur que lorsqu'il tourne en production. L'automatisation (CI/CD, tests ciblés) sert à accélérer le Time-to-Market en toute sécurité, non par pur dogme.",
+  "philosophy.p4.proof": "En pratique : Pipelines et suites de tests conçus pour itérer rapidement et déployer sereinement en milieu réglementé.",
+
   "tech.title": "Technologies",
   "resume.title": "Aperçu du CV",
   "resume.click": "📄 Cliquez pour voir mon CV",
@@ -94,5 +115,42 @@
   "privpol.updates.desc": "Je peux mettre à jour cette politique occasionnellement.",
   "privpol.contact.title": "Me Contacter",
   "privpol.contact.desc": "Pour toute question liée à la confidentialité :",
-  "privpol.contact.email": "E-mail :"
+  "privpol.contact.email": "E-mail :",
+
+  "timeline.header.title": "Matrice Académique et Professionnelle",
+  "timeline.header.subtitle": "Cartographie temporelle à l'échelle (2026 – 2020). Gauche : Académique | Droite : Professionnel",
+
+  "timeline.job1.title": "Ingénieur Logiciel chez Keifi by Izertis",
+  "timeline.job1.subtitle": "Hybride · Espagne",
+  "timeline.job1.date": "Juin 2024 – Présent",
+  "timeline.job1.duration": "POSTE ACTUEL",
+  "timeline.job1.desc": "Développement d'infrastructures fintech à haute disponibilité pour des institutions majeures telles que MAPFRE et Singular Bank avec Java, Spring Boot et Kafka. Application du DDD aux systèmes comptables et optimisation du traitement des paiements avec Virtual Threads, améliorant les performances de 49,8%.",
+
+  "timeline.master.title": "Master en Ingénierie Informatique",
+  "timeline.master.subtitle": "Université de Grenade",
+  "timeline.master.date": "Sep 2024 – Fév 2026",
+  "timeline.master.duration": "1,5 ANS",
+  "timeline.master.desc": "Spécialisation avancée en ingénierie logicielle et systèmes distribués. Recherche axée sur la conception de frameworks d'API financières hautement évolutifs et sécurisés, conformes aux normes PSD2/BIAN et aux protocoles OAuth2.",
+
+  "timeline.job2.title": "Ingénieur Logiciel (Stagiaire)",
+  "timeline.job2.subtitle": "Keifi Technologies",
+  "timeline.job2.date": "Juin 2023 – Déc 2023",
+  "timeline.job2.duration": "6 MOIS",
+  "timeline.job2.desc": "Refactorisation de modules Spring Boot existants et optimisation des requêtes SQL pour réduire la latence de l'API de la plateforme Mapfre Afin. Recherche et mise en œuvre d'architectures d'API financières sécurisées basées sur OAuth2 et OpenID Connect.",
+
+  "timeline.degree.title": "Licence en Ingénierie Informatique",
+  "timeline.degree.subtitle": "Université de Grenade",
+  "timeline.degree.date": "Sep 2020 – Juin 2024",
+  "timeline.degree.duration": "4 ANS DE LICENCE",
+  "timeline.degree.desc": "Bases fondamentales de l'informatique avec une spécialisation en systèmes d'information, gestion avancée de bases de données et systèmes d'entreprise. Projet de fin d'études axé sur le développement d'une plateforme eSports réactive en temps réel.",
+
+  "timeline.course1.title": "ML et Big Data pour la Bioinformatique",
+  "timeline.course1.date": "Avr 2023",
+  "timeline.course1.duration": "SIMULTANÉ",
+  "timeline.course1.desc": "Application des techniques de Machine Learning et de Big Data à des ensembles de données biologiques. Développement de pipelines d'analyse, de modélisation prédictive et de traitement de l'information génomique.",
+
+  "timeline.course2.title": "Information Numérique : Représentation et Codage",
+  "timeline.course2.date": "Oct 2022",
+  "timeline.course2.duration": "SIMULTANÉ",
+  "timeline.course2.desc": "Exploration des fondamentaux de la théorie de l'information, axée sur la manière dont les données numériques sont compressées et transmises. Applications pratiques d'algorithmes de codage et intégrité des données."
 }

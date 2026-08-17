@@ -8,11 +8,32 @@
   "hero.desc": "Java/Spring Boot Spezialist für Fintech-Lösungen. Fokus auf Clean Architecture und High-Performance APIs.",
   "hero.btn.contact": "Kontakt aufnehmen",
   "hero.btn.work": "Meine Arbeiten",
-  "whoami.title": "WER BIN ICH?",
-  "whoami.p1": "Hallo! Ich bin <span class=\"text-white font-semibold\">Alberto Plaza Montes</span>, ein 23-jähriger Informatikingenieur aus Spanien.",
-  "whoami.p2": "Derzeit absolviere ich meinen <span class=\"text-white font-semibold\">Master</span> und arbeite im <span class=\"text-white font-semibold\">FinTech-Sektor</span> als <span class=\"{highlightColor}\">Backend-Entwickler</span> und <span class=\"{highlightColor}\">Softwarearchitekt</span>.",
-  "whoami.p3": "In meiner Freizeit begeistere ich mich für persönliche Projekte von <span class=\"text-green-400\">Minecraft-Server-Plugins</span> bis hin zu Prototypen neuer <span class=\"text-green-400\">FinTech-Ideen</span>.",
-  "whoami.p4": "Ich lerne ständig dazu und suche neue Herausforderungen, die mich beruflich und persönlich weiterbringen.",
+
+  "whoami.title": "ÜBER MICH",
+  "whoami.p1": "Hallo! Ich bin <span class=\"text-white font-semibold\">Alberto Plaza Montes</span>, Informatik-Ingenieur (M.Sc.) aus Spanien.",
+  "whoami.p2": "Ich arbeite im <span class=\"text-white font-semibold\">FinTech-Sektor</span> als <span class=\"{highlightColor}\">Backend Software Engineer</span> und spezialisiere mich auf den Entwurf von <span class=\"{highlightColor}\">ereignisgesteuerten Architekturen (DDD)</span>, transaktionalen Systemen und hochperformanten Diensten.",
+  "whoami.p3": "In meiner Freizeit betreibe ich mein eigenes <span class=\"text-green-400\">Homelab</span> und entwickle Projekte mit Schwerpunkt auf <span class=\"text-green-400\">verteilten Systemen, Nebenläufigkeit und FinTech-Infrastruktur</span>.",
+  "whoami.p4": "Mein Fokus liegt auf dem Aufbau resilienter, skalierbarer Software mit strikter Datenintegrität unter Einhaltung von Industriestandards wie EBA und BIAN.",
+
+  "philosophy.header.title": "ENGINEERING-PHILOSOPHIE",
+  "philosophy.header.subtitle": "Technische Prinzipien und Leitlinien, nach denen ich skalierbare und robuste Systeme entwerfe.",
+
+  "philosophy.p1.title": "Empirische Messung vor Optimierung",
+  "philosophy.p1.stance": "Keine Änderungen auf Basis von Vermutungen. Bevor Code angefasst wird, analysiere ich echte Engpässe (JVM, Datenbank-Contention, Netzwerklatenz).",
+  "philosophy.p1.proof": "In der Praxis: Virtual-Threads-Refactoring mit 49,8 % Leistungssteigerung und SQL-Optimierung bei Mapfre Afín.",
+
+  "philosophy.p2.title": "Radikale Einfachheit & geringer Wartungsaufwand",
+  "philosophy.p2.stance": "Die beste Architektur nutzt nicht die meisten Patterns, sondern ist die einfachste, die alle Anforderungen erfüllt. Lesbarer und um 3:00 Uhr nachts wartbarer Code steht vor unnötigen Abstraktionen.",
+  "philosophy.p2.proof": "In der Praxis: Contract-First-API-Design (OpenAPI) und klare Modulgrenzen zur Vermeidung unnötiger Komplexität.",
+
+  "philosophy.p3.title": "Dateninvarianz & Konsistenz vor verteilter Komplexität",
+  "philosophy.p3.stance": "Im FinTech-Bereich hat Datenintegrität oberste Priorität: korrekte Bilanzen, idempotente Events und fehlerfreie Zustände. Wenn eine SQL-Transaktion genügt, vermeide ich verteilte Systeme.",
+  "philosophy.p3.proof": "In der Praxis: Abstimmungs- und Verrechnungssysteme mit 100 % garantierter buchhalterischer Konsistenz.",
+
+  "philosophy.p4.title": "Fokus auf Geschäftswert & sichere Bereitstellung",
+  "philosophy.p4.stance": "Software stiftet erst in Produktion echten Wert. Automatisierung (CI/CD, gezielte Tests) dient der schnellen und sicheren Verkürzung der Time-to-Market.",
+  "philosophy.p4.proof": "In der Praxis: Robuste Pipelines und Test-Suites für schnelle Iterationen und sichere Deployments in regulierten Umgebungen.",
+
   "tech.title": "Technologien",
   "resume.title": "Lebenslauf-Vorschau",
   "resume.click": "📄 Klicken, um meinen Lebenslauf anzusehen",
@@ -94,5 +115,42 @@
   "privpol.updates.desc": "Ich kann diese Richtlinie gelegentlich aktualisieren.",
   "privpol.contact.title": "Kontaktiere mich",
   "privpol.contact.desc": "Bei datenschutzbezogenen Fragen:",
-  "privpol.contact.email": "E-Mail:"
+  "privpol.contact.email": "E-Mail:",
+
+  "timeline.header.title": "Akademische und Berufliche Matrix",
+  "timeline.header.subtitle": "Maßstabsgetreue zeitliche Abbildung (2026 – 2020). Links: Akademisch | Rechts: Beruflich",
+
+  "timeline.job1.title": "Softwareentwickler bei Keifi by Izertis",
+  "timeline.job1.subtitle": "Hybrid · Spanien",
+  "timeline.job1.date": "Jun 2024 – Heute",
+  "timeline.job1.duration": "AKTUELLE POSITION",
+  "timeline.job1.desc": "Entwicklung hochverfügbarer Fintech-Infrastrukturen für Großkunden wie MAPFRE und Singular Bank mit Java, Spring Boot und Kafka. Anwendung von DDD auf Buchhaltungssysteme und Optimierung der Zahlungsabwicklung durch Virtual Threads, was zu einer Leistungssteigerung von 49,8 % führte.",
+
+  "timeline.master.title": "Master in Informatik",
+  "timeline.master.subtitle": "Universität Granada",
+  "timeline.master.date": "Sep 2024 – Feb 2026",
+  "timeline.master.duration": "1,5 JAHRE",
+  "timeline.master.desc": "Erweiterte Spezialisierung in Software-Engineering und verteilten Systemen. Forschungsschwerpunkt auf der Entwicklung hochskalierbarer, sicherer Finanz-API-Frameworks unter Einhaltung von PSD2/BIAN-Standards und OAuth2-Protokollen.",
+
+  "timeline.job2.title": "Softwareentwickler (Praktikum)",
+  "timeline.job2.subtitle": "Keifi Technologies",
+  "timeline.job2.date": "Jun 2023 – Dez 2023",
+  "timeline.job2.duration": "6 MONATE",
+  "timeline.job2.desc": "Refactoring bestehender Spring Boot-Module und Optimierung von SQL-Abfragen zur Reduzierung der API-Latenz für die Mapfre Afin-Plattform. Erforschung und Implementierung sicherer Finanz-API-Architekturen auf Basis von OAuth2 und OpenID Connect.",
+
+  "timeline.degree.title": "Bachelor in Informatik",
+  "timeline.degree.subtitle": "Universität Granada",
+  "timeline.degree.date": "Sep 2020 – Jun 2024",
+  "timeline.degree.duration": "4 JAHRE BACHELOR",
+  "timeline.degree.desc": "Grundlagen der Informatik mit Spezialisierung auf Informationssysteme, erweitertes Datenbankmanagement und Unternehmenssysteme. Abschlussprojekt zur Entwicklung einer reaktiven eSports-Plattform in Echtzeit.",
+
+  "timeline.course1.title": "ML und Big Data für die Bioinformatik",
+  "timeline.course1.date": "Apr 2023",
+  "timeline.course1.duration": "GLEICHZEITIG",
+  "timeline.course1.desc": "Anwendung von Machine Learning- und Big Data-Techniken auf biologische Datensätze. Schwerpunkt auf der Entwicklung von Analyse-Pipelines, prädiktiver Modellierung und Verarbeitung genomischer Informationen.",
+
+  "timeline.course2.title": "Digitale Information: Repräsentation und Codierung",
+  "timeline.course2.date": "Okt 2022",
+  "timeline.course2.duration": "GLEICHZEITIG",
+  "timeline.course2.desc": "Untersuchung der Grundlagen der Informationstheorie mit Schwerpunkt auf der Komprimierung und Übertragung digitaler Daten. Praktische Anwendungen von Codierungsalgorithmen und Datenintegrität."
 }

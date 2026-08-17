@@ -1,0 +1,98 @@
+---
+import { getLangFromUrl, useTranslations } from "../utils/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const pillars = [
+  {
+    number: "01",
+    titleKey: "philosophy.p1.title",
+    stanceKey: "philosophy.p1.stance",
+    proofKey: "philosophy.p1.proof",
+    badgeColor: "text-cyan-400 bg-cyan-950/40 border-cyan-800/50",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />`,
+  },
+  {
+    number: "02",
+    titleKey: "philosophy.p2.title",
+    stanceKey: "philosophy.p2.stance",
+    proofKey: "philosophy.p2.proof",
+    badgeColor: "text-emerald-400 bg-emerald-950/40 border-emerald-800/50",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />`,
+  },
+  {
+    number: "03",
+    titleKey: "philosophy.p3.title",
+    stanceKey: "philosophy.p3.stance",
+    proofKey: "philosophy.p3.proof",
+    badgeColor: "text-indigo-400 bg-indigo-950/40 border-indigo-800/50",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />`,
+  },
+  {
+    number: "04",
+    titleKey: "philosophy.p4.title",
+    stanceKey: "philosophy.p4.stance",
+    proofKey: "philosophy.p4.proof",
+    badgeColor: "text-amber-400 bg-amber-950/40 border-amber-800/50",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M13 10V3L4 14h7v7l9-11h-7z" />`,
+  },
+];
+---
+
+<section class="w-full max-w-5xl mx-auto px-4 py-12 mb-16">
+  <div class="text-center mb-12">
+    <span
+      class="inline-block px-3 py-1 mb-3 text-xs font-mono font-semibold tracking-wider text-cyan-400 uppercase bg-cyan-950/60 border border-cyan-800/50 rounded-full shadow-inner"
+    >
+      // CORE_PRINCIPLES
+    </span>
+    <h2
+      class="text-2xl md:text-3xl font-bold tracking-tight text-white font-mono"
+    >
+      {t("philosophy.header.title")}
+    </h2>
+    <p class="text-sm text-neutral-400 mt-2 max-w-2xl mx-auto">
+      {t("philosophy.header.subtitle")}
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {
+      pillars.map((pillar) => (
+        <article class="group relative flex flex-col justify-between rounded-xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06] hover:shadow-xl hover:shadow-cyan-950/30">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span
+                class={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono font-bold rounded-md border ${pillar.badgeColor}`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  set:html={pillar.icon}
+                />
+                PILAR {pillar.number}
+              </span>
+            </div>
+
+            <h3 class="text-lg font-bold text-white mb-2 font-mono group-hover:text-cyan-300 transition-colors">
+              {t(pillar.titleKey)}
+            </h3>
+
+            <p class="text-sm text-neutral-300 leading-relaxed mb-4">
+              {t(pillar.stanceKey)}
+            </p>
+          </div>
+
+          <div class="pt-4 mt-2 border-t border-white/5 flex items-start gap-2 text-xs text-neutral-400 font-mono">
+            <span class="text-cyan-400 shrink-0 font-bold">➜</span>
+            <span>{t(pillar.proofKey)}</span>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

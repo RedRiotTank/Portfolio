@@ -8,11 +8,32 @@
   "hero.desc": "Java/Spring Boot 专家，专注于构建金融科技解决方案、清晰的架构和高性能 API。",
   "hero.btn.contact": "联系我",
   "hero.btn.work": "查看作品",
-  "whoami.title": "我是谁？",
-  "whoami.p1": "你好！我是 <span class=\"text-white font-semibold\">Alberto Plaza Montes</span>，一名来自西班牙的 23 岁计算机工程师。",
-  "whoami.p2": "我目前正在攻读<span class=\"text-white font-semibold\">硕士学位</span>，同时在<span class=\"text-white font-semibold\">金融科技领域</span>担任<span class=\"{highlightColor}\">后端开发人员</span>和<span class=\"{highlightColor}\">软件架构师</span>。",
-  "whoami.p3": "在空闲时间，我热衷于个人项目，从 <span class=\"text-green-400\">Minecraft 服务器插件</span> 到原型化新的 <span class=\"text-green-400\">FinTech 创意</span>。",
-  "whoami.p4": "我一直在学习并寻找新的挑战，以帮助我在专业和个人方面成长。",
+
+  "whoami.title": "关于我",
+  "whoami.p1": "你好！我是 <span class=\"text-white font-semibold\">Alberto Plaza Montes</span>，一名现居西班牙的计算机科学硕士工程师 (M.Sc.)。",
+  "whoami.p2": "我目前在 <span class=\"text-white font-semibold\">金融科技 (FinTech) 领域</span> 担任 <span class=\"{highlightColor}\">后端软件工程师</span>，专注于设计 <span class=\"{highlightColor}\">事件驱动架构 (DDD)</span>、事务型系统以及高性能后端服务。",
+  "whoami.p3": "在工作之余，我维护着自己的 <span class=\"text-green-400\">Homelab</span>，并热衷于开发围绕 <span class=\"text-green-400\">分布式系统、并发编程及金融基础设施</span> 的项目。",
+  "whoami.p4": "我致力于构建具备严格数据一致性、高可用与高可扩展性的软件，并深度践行 EBA 和 BIAN 等行业标准。",
+
+  "philosophy.header.title": "工程哲学",
+  "philosophy.header.subtitle": "指导我设计、构建和扩展高可用后端系统的核心技术原则与工程思维。",
+
+  "philosophy.p1.title": "基于实测数据优化，拒绝主观臆断",
+  "philosophy.p1.stance": "在未进行瓶颈剖析前绝不盲目改动代码。优先通过 JVM 性能分析、数据库争用检测及网络延迟排查真实瓶颈。",
+  "philosophy.p1.proof": "实战验证：运用 Java 17 虚拟线程重构关键服务达成 49.8% 性能提升，并深度优化 Mapfre Afín 的 SQL 查询。",
+
+  "philosophy.p2.title": "极致简约与低维护成本",
+  "philosophy.p2.stance": "优秀的架构并非充斥着最多设计模式，而是在满足非功能需求的前提下保持极致简单。追求在凌晨三点也能轻松排查的清晰设计。",
+  "philosophy.p2.proof": "实战验证：采用契约优先 (OpenAPI) 与高内聚模块设计，在不引入冗余抽象层的前提下降低系统集成摩擦。",
+
+  "philosophy.p3.title": "数据不变量与强一致性高于分布式复杂度",
+  "philosophy.p3.stance": "在金融科技场景中，数据完整性永远第一。核心在于保障账目准确、事件幂等与零数据污染。若单机事务能解决，绝不过度引入分布式系统。",
+  "philosophy.p3.proof": "实战验证：设计清算对账与过渡账户系统，严格确保 100% 账务数据一致性。",
+
+  "philosophy.p4.title": "业务价值导向与安全高效交付",
+  "philosophy.p4.stance": "软件只有在生产环境中稳定运行才能创造价值。自动化（CI/CD、针对性测试）的核心目的是安全缩短交付周期，而非教条主义。",
+  "philosophy.p4.proof": "实战验证：构建标准化流水线与测试套件，在强监管金融环境下实现快速且安全的版本迭代。",
+
   "tech.title": "技术栈",
   "resume.title": "简历预览",
   "resume.click": "📄 点击查看我的简历",
@@ -94,5 +115,42 @@
   "privpol.updates.desc": "我可能会不时更新此政策。",
   "privpol.contact.title": "联系我",
   "privpol.contact.desc": "如有任何与隐私相关的问题：",
-  "privpol.contact.email": "电子邮件："
+  "privpol.contact.email": "电子邮件：",
+
+  "timeline.header.title": "学术与职业发展矩阵",
+  "timeline.header.subtitle": "等比例时间轴映射 (2026 – 2020)。左侧：学术 | 右侧：职业",
+
+  "timeline.job1.title": "软件工程师 - Keifi by Izertis",
+  "timeline.job1.subtitle": "混合办公 · 西班牙",
+  "timeline.job1.date": "2024年6月 – 至今",
+  "timeline.job1.duration": "当前职位",
+  "timeline.job1.desc": "使用Java、Spring Boot和Kafka为MAPFRE和Singular Bank等大型机构开发高可用性的金融科技基础设施。将DDD应用于会计系统，并使用虚拟线程优化支付处理，使交易处理性能提高49.8%。",
+
+  "timeline.master.title": "计算机工程硕士",
+  "timeline.master.subtitle": "格拉纳达大学",
+  "timeline.master.date": "2024年9月 – 2026年2月",
+  "timeline.master.duration": "1.5 年",
+  "timeline.master.desc": "深入研究软件工程和分布式系统。研究重点是设计高可扩展、安全的金融API框架，遵守PSD2/BIAN标准和OAuth2协议。",
+
+  "timeline.job2.title": "软件工程师（实习）",
+  "timeline.job2.subtitle": "Keifi Technologies",
+  "timeline.job2.date": "2023年6月 – 2023年12月",
+  "timeline.job2.duration": "6 个月",
+  "timeline.job2.desc": "重构旧版Spring Boot模块并优化SQL查询，以降低Mapfre Afin平台的API延迟。研究并实现了基于OAuth2和OpenID Connect的安全金融API架构。",
+
+  "timeline.degree.title": "计算机工程学士",
+  "timeline.degree.subtitle": "格拉纳达大学",
+  "timeline.degree.date": "2020年9月 – 2024年6月",
+  "timeline.degree.duration": "4年制本科学位",
+  "timeline.degree.desc": "计算机科学核心基础，专攻信息系统、高级数据库管理和企业系统。毕业设计开发了一个响应式实时电子竞技平台。",
+
+  "timeline.course1.title": "生物信息学的机器学习与大数据",
+  "timeline.course1.date": "2023年4月",
+  "timeline.course1.duration": "同时进行",
+  "timeline.course1.desc": "将机器学习和大数据技术应用于生物数据集。专注于开发分析管道、预测建模和大规模基因组信息处理。",
+
+  "timeline.course2.title": "数字信息：表示与编码",
+  "timeline.course2.date": "2022年10月",
+  "timeline.course2.duration": "同时进行",
+  "timeline.course2.desc": "探索信息论基础，重点关注数字数据的压缩和传输。涵盖编码算法和数据完整性的实际应用。"
 }
