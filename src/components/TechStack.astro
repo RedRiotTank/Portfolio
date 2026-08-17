@@ -1,48 +1,59 @@
 ---
 const techStack = [
+  // Core
   { name: "Java", logo: "/images/stack/java.png" },
-  { name: "Spring Boot", logo: "/images/stack/springboot.svg" },
   { name: "Kotlin", logo: "/images/stack/kotlin.png" },
+  { name: "Scala", logo: "/images/stack/scala.png" },
+  { name: "Go", logo: "/images/stack/go.png" },
+
+  // Frameworks & Backend Core
+  { name: "Spring Boot", logo: "/images/stack/springboot.svg" },
   { name: "Ktor", logo: "/images/stack/ktor.png" },
-  { name: "Maven", logo: "/images/stack/maven.png" },
-  { name: "Gradle", logo: "/images/stack/gradle.png" },
-  { name: "MapStruct", logo: "/images/stack/mapstruct.png" },
-  { name: "Junit", logo: "/images/stack/junit.png" },
-  { name: "TypeScript", logo: "/images/stack/ts.png" },
-  { name: "Angular", logo: "/images/stack/angular.png" },
-  { name: "mysql", logo: "/images/stack/mysql.png" },
-  { name: "MariaDB", logo: "/images/stack/mariadb.png" },
-  { name: "Postgre", logo: "/images/stack/postgre.png" },
-  { name: "MongoDB", logo: "/images/stack/mongo.png" },
-  { name: "Jenkins", logo: "/images/stack/jenkins.png" },
-  { name: "Open Api", logo: "/images/stack/openapi.png" },
-  { name: "Git", logo: "/images/stack/git.png" },
-  { name: "Docker", logo: "/images/stack/docker.png" },
   { name: "Kafka", logo: "/images/stack/kafka.webp" },
+  { name: "OpenAPI", logo: "/images/stack/openapi.png" },
+
+  // DB & Caching
+  { name: "PostgreSQL", logo: "/images/stack/postgre.png" },
+  { name: "MySQL", logo: "/images/stack/mysql.png" },
   { name: "Redis", logo: "/images/stack/redis.png" },
+
+  // Cloud & Infra
+  { name: "AWS", logo: "/images/stack/aws.png" },
+  { name: "Google Cloud", logo: "/images/stack/gcp.png" },
+  { name: "Docker", logo: "/images/stack/docker.png" },
+  { name: "Kubernetes", logo: "/images/stack/k8s.webp" },
+  { name: "GitHub Actions", logo: "/images/stack/github-actions.png" },
 ];
 ---
 
 <section class="py-12 px-4">
-  <h2 class="text-3xl font-bold text-center mb-6 text-gray-900 dark:text-white">
-    Tech Stack
-  </h2>
+  <div class="text-center mb-8">
+    <span
+      class="inline-block px-3 py-1 mb-2 text-xs font-mono font-semibold tracking-wider text-cyan-400 uppercase bg-cyan-950/60 border border-cyan-800/50 rounded-full shadow-inner"
+    >
+      // CORE_CAPABILITIES
+    </span>
+    <h2 class="text-3xl font-bold tracking-tight text-white font-mono">
+      Tech Stack
+    </h2>
+  </div>
 
-  <div class="mx-auto max-w-7xl">
-    <div class="flex flex-wrap justify-center gap-6 sm:gap-8">
+  <div class="mx-auto max-w-5xl">
+    <div
+      class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6"
+    >
       {
         techStack.map((tech) => (
-          <div class="w-[calc(33.333%-12px)] sm:w-[calc(33.333%-16px)] md:w-[calc(25%-18px)] lg:w-[calc(20%-20px)] xl:w-[calc(12.5%-22px)]">
-            <div class="flex flex-col items-center text-center h-full">
-              <img
-                src={tech.logo}
-                alt={tech.name}
-                class="w-14 h-14 sm:w-16 sm:h-16 object-contain mb-2"
-              />
-              <span class="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
-                {tech.name}
-              </span>
-            </div>
+          <div class="group flex flex-col items-center justify-center p-3 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/15 transition-all duration-200">
+            <img
+              src={tech.logo}
+              alt={tech.name}
+              class="w-10 h-10 sm:w-12 sm:h-12 object-contain mb-2 transition-transform duration-200 group-hover:scale-110"
+              loading="lazy"
+            />
+            <span class="text-xs font-medium text-neutral-300 text-center font-mono group-hover:text-white transition-colors">
+              {tech.name}
+            </span>
           </div>
         ))
       }
