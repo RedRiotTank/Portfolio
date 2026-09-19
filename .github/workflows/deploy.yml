@@ -31,10 +31,11 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: "dist/"
-          target: "/var/www/portfolio/"
+          # ¡NUEVA RUTA DE DESTINO!
+          target: "/opt/portfolio/html/"
           strip_components: 1
 
-      - name: Reload Nginx
+      - name: Reload Nginx in Docker
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -42,4 +43,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            sudo systemctl reload nginx
+            docker exec portfolio-web nginx -s reload
