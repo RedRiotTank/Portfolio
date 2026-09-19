@@ -31,9 +31,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: "dist/"
-          # ¡NUEVA RUTA DE DESTINO!
           target: "/opt/portfolio/html/"
           strip_components: 1
+          rm: true
 
       - name: Reload Nginx in Docker
         uses: appleboy/ssh-action@v1.0.0
