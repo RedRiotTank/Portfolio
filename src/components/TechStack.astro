@@ -1,28 +1,15 @@
 ---
 const techStack = [
-  // Core
   { name: "Java", logo: "/images/stack/java.png" },
   { name: "Kotlin", logo: "/images/stack/kotlin.png" },
-  { name: "Scala", logo: "/images/stack/scala.png" },
-  { name: "Go", logo: "/images/stack/go.png" },
-
-  // Frameworks & Backend Core
   { name: "Spring Boot", logo: "/images/stack/springboot.svg" },
-  { name: "Ktor", logo: "/images/stack/ktor.png" },
   { name: "Kafka", logo: "/images/stack/kafka.webp" },
-  { name: "OpenAPI", logo: "/images/stack/openapi.png" },
-
-  // DB & Caching
   { name: "PostgreSQL", logo: "/images/stack/postgre.png" },
-  { name: "MySQL", logo: "/images/stack/mysql.png" },
   { name: "Redis", logo: "/images/stack/redis.png" },
-
-  // Cloud & Infra
-  { name: "AWS", logo: "/images/stack/aws.png" },
-  { name: "Google Cloud", logo: "/images/stack/gcp.png" },
   { name: "Docker", logo: "/images/stack/docker.png" },
-  { name: "Kubernetes", logo: "/images/stack/k8s.webp" },
-  { name: "GitHub Actions", logo: "/images/stack/github-actions.png" },
+  { name: "Google Cloud", logo: "/images/stack/gcp.png" },
+  { name: "AWS", logo: "/images/stack/aws.png" },
+  { name: "Linux", logo: "/images/stack/linux.svg" },
 ];
 ---
 
@@ -40,7 +27,7 @@ const techStack = [
 
   <div class="mx-auto max-w-5xl">
     <div
-      class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6"
+      class="grid grid-cols-3 sm:grid-cols-5 gap-6"
     >
       {
         techStack.map((tech) => (
