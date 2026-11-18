@@ -415,6 +415,51 @@
   let activeDoomStop: (() => void) | null = null;
   let activeEscapeHandler: ((event: KeyboardEvent) => void) | null = null;
 
+  const mouseYOverrides: Array<{
+    proto: object;
+    descriptor: PropertyDescriptor;
+  }> = [];
+
+  // Vanilla Doom maps mouse Y to forward/backward movement. The user wants
+  // only horizontal camera movement, so hide movementY from js-dos while the
+  // game is open. movementX is untouched.
+  function suppressMouseY() {
+    if (mouseYOverrides.length) return;
+
+    const protos: object[] = [MouseEvent.prototype];
+    if (typeof PointerEvent !== "undefined") {
+      protos.push(PointerEvent.prototype);
+    }
+
+    for (const proto of protos) {
+      const descriptor = Object.getOwnPropertyDescriptor(
+        proto,
+        "movementY",
+      );
+      if (!descriptor) continue;
+
+      try {
+        Object.defineProperty(proto, "movementY", {
+          configurable: true,
+          get: () => 0,
+        });
+        mouseYOverrides.push({ proto, descriptor });
+      } catch {
+        // Ignore browsers that do not allow overriding the descriptor.
+      }
+    }
+  }
+
+  function restoreMouseY() {
+    for (const { proto, descriptor } of mouseYOverrides.splice(0)) {
+      try {
+        Object.defineProperty(proto, "movementY", descriptor);
+      } catch {
+        // Ignore restore errors.
+      }
+    }
+  }
+
   // Capture Esc before js-dos/Doom so it only releases the pointer or closes
   // the overlay instead of opening Doom's own menu.
   window.addEventListener(
@@ -994,6 +1039,7 @@
       if (closing) return;
       closing = true;
       setDosCssActive(false);
+      restoreMouseY();
 
       activeEscapeHandler = null;
 
@@ -1051,6 +1097,8 @@
 
     async function openDoom() {
       if (stageEl || closing) return;
+
+      suppressMouseY();
 
       const scrollY = window.scrollY;
       const scrollX = window.scrollX;
@@ -1334,6 +1382,7 @@
     }
     activeDoomStop = null;
     activeEscapeHandler = null;
+    restoreMouseY();
     stopPrewarm();
     setDosCssActive(false);
     document.getElementById("doom-stage")?.remove();
