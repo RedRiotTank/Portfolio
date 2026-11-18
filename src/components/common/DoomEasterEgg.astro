@@ -427,6 +427,21 @@
     true,
   );
 
+  // Let the browser handle these even while Doom has keyboard focus.
+  window.addEventListener(
+    "keydown",
+    (event) => {
+      const key = event.key.toLowerCase();
+      if (
+        event.key === "F5" ||
+        ((event.ctrlKey || event.metaKey) && key === "r")
+      ) {
+        event.stopImmediatePropagation();
+      }
+    },
+    true,
+  );
+
   function ensureDosAssets(): Promise<void> {
     if (typeof (window as any).Dos === "function") return Promise.resolve();
     if (jsdosAssetsPromise) return jsdosAssetsPromise;
@@ -566,21 +581,19 @@
 
         const props = DosFn(
           player,
-          dosOptions(
-            0,
-            (event: string) => {
+          dosOptions(0, (event: string) => {
+            if (player.classList.contains("doom-player--prewarm")) {
               try {
                 propsRef?.setVolume?.(0);
               } catch {
                 // Ignore volume errors while booting.
               }
+            }
 
-              if (event === "ci-ready") {
-                window.setTimeout(finish, 2500);
-              }
-            },
-            false,
-          ),
+            if (event === "ci-ready") {
+              window.setTimeout(finish, 2500);
+            }
+          }),
         );
         propsRef = props;
         try {
@@ -616,27 +629,7 @@
     return prewarmPromise;
   }
 
-  function parkPrewarm(player: HTMLElement, props: any) {
-    try {
-      props?.setMouseCapture?.(false);
-      props?.setPaused?.(true);
-      props?.setVolume?.(0);
-    } catch {
-      // Ignore pause/volume errors while parking.
-    }
-    player.classList.add("doom-player--prewarm");
-    player.setAttribute("inert", "");
-    player.setAttribute("aria-hidden", "true");
-    document.body.appendChild(player);
-    prewarm = {
-      player: player as HTMLDivElement,
-      props,
-      ready: Promise.resolve(),
-    };
-    prewarmPromise = null;
-  }
-
-  function schedulePrewarm() {
+  function schedulePrefetch() {
     if (isMobileViewport()) return;
     const connection = (navigator as any).connection;
     const slowConnection = ["slow-2g", "2g", "3g"].includes(
@@ -645,9 +638,24 @@
     if (connection?.saveData || slowConnection) return;
 
     const start = () => {
-      void ensurePrewarm().catch(() => {
-        // The normal open flow surfaces errors if prewarming fails.
+      void ensureDosAssets().catch(() => {
+        // The open flow surfaces load errors if anything fails.
       });
+
+      const assets = [
+        DOOM_BUNDLE,
+        "/doom/jsdos/emulators/emulators.js",
+        "/doom/jsdos/emulators/wdosbox.js",
+        "/doom/jsdos/emulators/wdosbox.wasm",
+        "/doom/jsdos/emulators/wlibzip.js",
+        "/doom/jsdos/emulators/wlibzip.wasm",
+      ];
+
+      for (const url of assets) {
+        void fetch(url, { cache: "force-cache" }).catch(() => {
+          // Prefetch is best-effort; the player requests them again if needed.
+        });
+      }
     };
 
     if ("requestIdleCallback" in window) {
@@ -766,9 +774,6 @@
       if (busy || closing) return;
       busy = true;
       preloadGif();
-      void ensurePrewarm().catch(() => {
-        // Prewarm is retried when the user actually opens the game.
-      });
       releaseFromFooter();
 
       const rect = peek.getBoundingClientRect();
@@ -995,18 +1000,12 @@
       if (tearRaf) cancelAnimationFrame(tearRaf);
       tearRaf = 0;
 
-      const props = currentProps;
-      const player = currentPlayerEl;
-
-      if (props && player) {
-        parkPrewarm(player, props);
-      } else {
-        try {
-          props?.stop?.();
-        } catch {
-          // Ignore shutdown errors.
-        }
+      try {
+        currentProps?.stop?.();
+      } catch {
+        // Ignore shutdown errors.
       }
+      stopPrewarm();
 
       activeDoomStop = null;
       currentProps = null;
@@ -1232,14 +1231,11 @@
         currentPlayerEl = null;
       };
 
-      await Promise.race([
-        warm.ready,
-        new Promise<void>((resolve) => window.setTimeout(resolve, 12000)),
-      ]);
-
       if (closing || !stageEl?.isConnected) {
-        if (currentProps && currentPlayerEl) {
-          parkPrewarm(currentPlayerEl, currentProps);
+        try {
+          currentProps?.stop?.();
+        } catch {
+          // Ignore shutdown errors.
         }
         currentProps = null;
         currentPlayerEl = null;
@@ -1319,7 +1315,7 @@
     window.addEventListener("blur", silenceForInactivity);
     window.addEventListener("focus", resumeAfterInactivity);
 
-    schedulePrewarm();
+    schedulePrefetch();
   }
 
   if (document.readyState === "loading") {
