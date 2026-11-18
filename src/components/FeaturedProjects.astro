@@ -13,6 +13,7 @@ const techList = [
   "panama",
   "go",
   "docker",
+  "linux",
 ] as const;
 type Tech = (typeof techList)[number];
 
@@ -47,11 +48,11 @@ const projects: Project[] = [
     technologies: ["java", "panama"],
   },
   {
-    title: "RedBlockChain-Core",
+    title: "Homelab",
     description: t("projects.p3.desc"),
-    image: "/images/projects/placeholder.svg",
-    link: "https://github.com/RedRiotTank/RedBlockChain-core",
-    technologies: ["java", "maven", "mongodb"],
+    image: "/images/projects/homelab.png",
+    link: "https://github.com/RedRiotTank/homelab",
+    technologies: ["docker", "linux"],
   },
   {
     title: "Fiscus",
@@ -73,13 +74,14 @@ const techIcons: Record<Tech, string> = {
   panama: "/images/stack/panama.png",
   go: "/images/stack/go.png",
   docker: "/images/stack/docker.png",
+  linux: "/images/stack/linux.svg",
 };
 
 var text = limit ? t("projects.selection") : t("projects.some");
 const isHome = variant === "cards" && limit !== undefined;
 ---
 
-<section class={isHome ? "flex min-h-screen flex-col justify-center py-10" : "py-10"}>
+<section class={isHome ? "py-16" : "py-10"}>
   <div class={isHome ? "mx-auto w-full max-w-5xl px-4" : "mx-auto max-w-7xl px-4"}>
     <h3 class="text-4xl font-bold text-center text-white mb-12">
       {text}

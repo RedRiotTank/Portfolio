@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200" fill="none">
+  <defs>
+    <linearGradient id="roof" x1="250" y1="340" x2="950" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#22c55e"/>
+    </linearGradient>
+    <linearGradient id="top1" x1="370" y1="350" x2="830" y2="235" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="left1" x1="370" y1="350" x2="600" y2="565" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#0891b2"/>
+    </linearGradient>
+    <linearGradient id="right1" x1="830" y1="350" x2="600" y2="565" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0891b2"/>
+      <stop offset="1" stop-color="#0e7490"/>
+    </linearGradient>
+    <linearGradient id="left2" x1="370" y1="450" x2="600" y2="665" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#0d9488"/>
+    </linearGradient>
+    <linearGradient id="right2" x1="830" y1="450" x2="600" y2="665" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0d9488"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+    <linearGradient id="left3" x1="370" y1="550" x2="600" y2="765" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4ade80"/>
+      <stop offset="1" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="right3" x1="830" y1="550" x2="600" y2="765" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#16a34a"/>
+      <stop offset="1" stop-color="#15803d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- roof -->
+  <path d="M250 340 L600 120 L950 340" stroke="url(#roof)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M282 334 L600 130 L918 334" stroke="#ecfeff" stroke-opacity="0.22" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- rack: bottom unit -->
+  <g>
+    <polygon points="370,550 600,665 600,765 370,650" fill="url(#left3)"/>
+    <polygon points="600,665 830,550 830,650 600,765" fill="url(#right3)"/>
+    <circle cx="680" cy="670" r="7.5" fill="#ecfeff" fill-opacity="0.9"/>
+    <circle cx="715" cy="652" r="7.5" fill="#ecfeff" fill-opacity="0.9"/>
+    <circle cx="750" cy="635" r="7.5" fill="#ecfeff" fill-opacity="0.9"/>
+  </g>
+
+  <!-- rack: middle unit -->
+  <g>
+    <polygon points="370,450 600,565 600,665 370,550" fill="url(#left2)"/>
+    <polygon points="600,565 830,450 830,550 600,665" fill="url(#right2)"/>
+    <circle cx="680" cy="570" r="7.5" fill="#ecfeff" fill-opacity="0.9"/>
+    <circle cx="715" cy="552" r="7.5" fill="#ecfeff" fill-opacity="0.9"/>
+    <circle cx="750" cy="535" r="7.5" fill="#ecfeff" fill-opacity="0.9"/>
+  </g>
+
+  <!-- rack: top unit -->
+  <g>
+    <polygon points="370,350 600,465 600,565 370,450" fill="url(#left1)"/>
+    <polygon points="600,465 830,350 830,450 600,565" fill="url(#right1)"/>
+    <polygon points="600,235 830,350 600,465 370,350" fill="url(#top1)"/>
+    <circle cx="680" cy="470" r="7.5" fill="#ecfeff" fill-opacity="0.9"/>
+    <circle cx="715" cy="452" r="7.5" fill="#ecfeff" fill-opacity="0.9"/>
+    <circle cx="750" cy="435" r="7.5" fill="#ecfeff" fill-opacity="0.9"/>
+    <!-- top face vents -->
+    <path d="M520 300 L650 300 M545 340 L700 340 M570 380 L750 380" stroke="#ecfeff" stroke-opacity="0.28" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <!-- seams between units -->
+  <path d="M370 450 L600 565 L830 450" stroke="#052e2b" stroke-opacity="0.55" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M370 550 L600 665 L830 550" stroke="#052e2b" stroke-opacity="0.55" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- network traces and nodes -->
+  <g stroke="#2dd4bf" stroke-opacity="0.75" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M370 500 L300 500 L270 530"/>
+    <path d="M370 620 L320 620 L290 650"/>
+    <path d="M830 470 L900 470 L930 440"/>
+    <path d="M830 590 L890 590 L920 620"/>
+  </g>
+  <g fill="#5eead4">
+    <circle cx="270" cy="530" r="12"/>
+    <circle cx="290" cy="650" r="12"/>
+    <circle cx="930" cy="440" r="12"/>
+    <circle cx="920" cy="620" r="12"/>
+  </g>
+
+  <!-- pixel dust -->
+  <g fill="#22d3ee">
+    <rect x="176" y="214" width="10" height="10" opacity="0.8"/>
+    <rect x="212" y="256" width="7" height="7" opacity="0.55"/>
+    <rect x="148" y="298" width="6" height="6" opacity="0.45"/>
+    <rect x="168" y="880" width="9" height="9" opacity="0.7"/>
+    <rect x="214" y="920" width="6" height="6" opacity="0.45"/>
+    <rect x="186" y="960" width="8" height="8" opacity="0.6"/>
+    <rect x="1006" y="196" width="10" height="10" opacity="0.8"/>
+    <rect x="1042" y="238" width="7" height="7" opacity="0.55"/>
+    <rect x="972" y="276" width="6" height="6" opacity="0.45"/>
+    <rect x="1030" y="890" width="9" height="9" opacity="0.7"/>
+    <rect x="984" y="932" width="6" height="6" opacity="0.45"/>
+    <rect x="1024" y="968" width="8" height="8" opacity="0.6"/>
+  </g>
+  <g fill="#22c55e">
+    <rect x="196" y="182" width="7" height="7" opacity="0.6"/>
+    <rect x="232" y="300" width="6" height="6" opacity="0.45"/>
+    <rect x="196" y="1004" width="7" height="7" opacity="0.55"/>
+    <rect x="1044" y="176" width="7" height="7" opacity="0.6"/>
+    <rect x="988" y="308" width="6" height="6" opacity="0.45"/>
+    <rect x="1038" y="1004" width="7" height="7" opacity="0.55"/>
+  </g>
+  <g fill="#5eead4">
+    <rect x="230" y="230" width="5" height="5" opacity="0.7"/>
+    <rect x="160" y="340" width="5" height="5" opacity="0.5"/>
+    <rect x="230" y="940" width="5" height="5" opacity="0.6"/>
+    <rect x="1040" y="230" width="5" height="5" opacity="0.7"/>
+    <rect x="1000" y="340" width="5" height="5" opacity="0.5"/>
+    <rect x="1060" y="940" width="5" height="5" opacity="0.6"/>
+  </g>
+</svg>

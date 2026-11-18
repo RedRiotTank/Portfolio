@@ -43,8 +43,9 @@
   "projects.some": "Algunos de los proyectos en los que he trabajado",
   "projects.p1.desc": "Una API REST auto-alojada en Spring Boot creada con Kotlin para generar secuencias de números pseudoaleatorios parametrizables a través de varias distribuciones estadísticas.",
   "projects.p2.desc": "Un navegador JSON de alto rendimiento en Java 22+ que opera directamente en la memoria off-heap usando punteros primitivos a través de Project Panama.",
-  "projects.p3.desc": "Mi propia implementación de una blockchain en Java.",
+  "projects.p3.desc": "Un homelab autoalojado sobre Docker Compose: medios, almacenamiento en la nube, copias de seguridad, DNS y servicios de red, con pequeñas automatizaciones en Python.",
   "projects.p4.desc": "Una plataforma de inteligencia de tesorería autoalojada para cuentas bancarias personales y de pequeñas empresas, con ingesta bancaria PSD2, almacenamiento en SQLite, conciliación de saldos, reservas de impuestos y alertas por Telegram y Discord.",
+  "projects.more": "Más proyectos en GitHub",
 
   "contact.title": "¡Contáctame!",
   "contact.p1": "¡No dudes en contactarme para colaboraciones o simplemente para saludar!",

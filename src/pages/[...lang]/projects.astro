@@ -1,5 +1,10 @@
 ---
-import { languages, defaultLang } from "../../utils/i18n";
+import {
+  languages,
+  defaultLang,
+  getLangFromUrl,
+  useTranslations,
+} from "../../utils/i18n";
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => ({
@@ -10,6 +15,9 @@ export function getStaticPaths() {
 import FeaturedProjects from "../../components/FeaturedProjects.astro";
 import Layout from "../../layouts/Layout.astro";
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
@@ -17,5 +25,17 @@ import Layout from "../../layouts/Layout.astro";
 <Layout>
   <main class="flex flex-col items-center bg-[#0d1117] text-white">
     <FeaturedProjects variant="list" />
+
+    <div class="mx-auto max-w-7xl px-4 pb-16 text-center">
+      <a
+        href="https://github.com/RedRiotTank"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-gray-300 transition-colors hover:border-green-400/50 hover:text-green-400"
+      >
+        {t("projects.more")}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
   </main>
 </Layout>
