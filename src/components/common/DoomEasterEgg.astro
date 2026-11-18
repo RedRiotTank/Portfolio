@@ -569,6 +569,12 @@
           dosOptions(
             0,
             (event: string) => {
+              try {
+                propsRef?.setVolume?.(0);
+              } catch {
+                // Ignore volume errors while booting.
+              }
+
               if (event === "ci-ready") {
                 window.setTimeout(finish, 2500);
               }
@@ -577,6 +583,11 @@
           ),
         );
         propsRef = props;
+        try {
+          props.setVolume?.(0);
+        } catch {
+          // Ignore volume errors while booting.
+        }
 
         if (generation !== prewarmGeneration) {
           try {
@@ -1273,6 +1284,40 @@
         // openDoom reports load failures in the overlay.
       });
     });
+
+    function silenceForInactivity() {
+      try {
+        currentProps?.setVolume?.(0);
+        currentProps?.setPaused?.(true);
+      } catch {
+        // Ignore pause/volume errors while booting or closing.
+      }
+
+      try {
+        prewarm?.props?.setVolume?.(0);
+      } catch {
+        // Ignore prewarm volume errors.
+      }
+    }
+
+    function resumeAfterInactivity() {
+      if (document.hidden || !stageEl || !currentProps || closing) return;
+
+      try {
+        currentProps.setVolume?.(0.55);
+        currentProps.setPaused?.(false);
+      } catch {
+        // Ignore resume/volume errors.
+      }
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) silenceForInactivity();
+      else resumeAfterInactivity();
+    });
+
+    window.addEventListener("blur", silenceForInactivity);
+    window.addEventListener("focus", resumeAfterInactivity);
 
     schedulePrewarm();
   }
