@@ -29,6 +29,12 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  @media (max-width: 768px) {
+    .doom-peek {
+      display: none !important;
+    }
+  }
+
   .doom-peek--free {
     position: fixed;
     height: 63px;
@@ -161,8 +167,19 @@
     cursor: none;
   }
 
+  .doom-player--prewarm {
+    opacity: 0 !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+  }
+
   /* js-dos leaves a 4px sidebar slider visible even in kiosk mode. */
   .doom-player .sidebar-slider {
+    display: none !important;
+  }
+
+  /* Replace js-dos' own mouse-capture modal with the compact help panel. */
+  .doom-player div[class*="bg-black/70"] {
     display: none !important;
   }
 
@@ -351,36 +368,22 @@
     }
   }
 
-  .doom-loading-toast {
+  .doom-error {
     position: fixed;
     bottom: 22px;
     left: 50%;
     z-index: 3;
     transform: translateX(-50%);
     padding: 8px 14px;
-    border: 1px solid rgba(74, 222, 128, 0.45);
+    border: 1px solid rgba(248, 113, 113, 0.55);
     border-radius: 9999px;
-    background: rgba(4, 8, 5, 0.88);
-    color: #4ade80;
+    background: rgba(20, 4, 4, 0.9);
+    color: #fca5a5;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 10px;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
     white-space: nowrap;
     pointer-events: none;
-    transition: opacity 0.25s ease;
-  }
-
-  .doom-loading-toast.is-hidden {
-    opacity: 0;
-  }
-
-  @media (max-width: 640px) {
-    .doom-loading-toast {
-      bottom: 14px;
-      padding: 7px 10px;
-      font-size: 9px;
-      letter-spacing: 0.16em;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -410,6 +413,19 @@
 
   let jsdosAssetsPromise: Promise<void> | null = null;
   let activeDoomStop: (() => void) | null = null;
+  let activeEscapeHandler: ((event: KeyboardEvent) => void) | null = null;
+
+  // Capture Esc before js-dos/Doom so it only releases the pointer or closes
+  // the overlay instead of opening Doom's own menu.
+  window.addEventListener(
+    "keydown",
+    (event) => {
+      if (event.key === "Escape" && activeEscapeHandler) {
+        activeEscapeHandler(event);
+      }
+    },
+    true,
+  );
 
   function ensureDosAssets(): Promise<void> {
     if (typeof (window as any).Dos === "function") return Promise.resolve();
@@ -420,6 +436,7 @@
         const link = document.createElement("link");
         link.rel = "stylesheet";
         link.href = JSDOS_CSS;
+        link.media = "not all";
         link.dataset.jsdos = "true";
         document.head.appendChild(link);
       }
@@ -441,6 +458,194 @@
     return jsdosAssetsPromise;
   }
 
+  function setDosCssActive(active: boolean) {
+    const link = document.querySelector(
+      'link[data-jsdos="true"]',
+    ) as HTMLLinkElement | null;
+    if (link) link.media = active ? "all" : "not all";
+  }
+
+  type PrewarmState = {
+    player: HTMLDivElement;
+    props: any;
+    ready: Promise<void>;
+  };
+
+  let prewarm: PrewarmState | null = null;
+  let prewarmPromise: Promise<PrewarmState> | null = null;
+  let prewarmGeneration = 0;
+
+  function isMobileViewport() {
+    return window.matchMedia("(max-width: 768px)").matches;
+  }
+
+  function dosOptions(
+    volume: number,
+    onEvent: (event: string) => void,
+    mouseCapture = true,
+  ) {
+    return {
+      url: DOOM_BUNDLE,
+      pathPrefix: JSDOS_PATH_PREFIX,
+      kiosk: true,
+      autoStart: true,
+      renderAspect: "4/3",
+      imageRendering: "pixelated",
+      volume,
+      mouseCapture,
+      noCursor: true,
+      mouseSensitivity: 0.6,
+      quickSave: false,
+      autoSave: false,
+      fsChanges: { local: false },
+      onEvent,
+    };
+  }
+
+  function stopPrewarm() {
+    prewarmGeneration += 1;
+    try {
+      prewarm?.props?.stop?.();
+    } catch {
+      // Ignore shutdown errors.
+    }
+    prewarm?.player?.remove();
+    prewarm = null;
+    prewarmPromise = null;
+  }
+
+  function ensurePrewarm(): Promise<PrewarmState> {
+    if (isMobileViewport()) {
+      return Promise.reject(
+        new Error("The Doom easter egg is desktop only."),
+      );
+    }
+    if (prewarm) return Promise.resolve(prewarm);
+    if (prewarmPromise) return prewarmPromise;
+
+    const generation = prewarmGeneration;
+
+    prewarmPromise = (async () => {
+      await ensureDosAssets();
+      if (generation !== prewarmGeneration) {
+        throw new Error("Prewarm cancelled.");
+      }
+
+      const player = document.createElement("div");
+      player.className = "doom-player doom-player--prewarm";
+      player.setAttribute("inert", "");
+      player.setAttribute("aria-hidden", "true");
+      document.body.appendChild(player);
+
+      let resolveReady!: () => void;
+      const ready = new Promise<void>((resolve) => {
+        resolveReady = resolve;
+      });
+      let settled = false;
+      let propsRef: any = null;
+
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        if (player.classList.contains("doom-player--prewarm")) {
+          try {
+            propsRef?.setPaused(true);
+            propsRef?.setVolume(0);
+          } catch {
+            // Ignore pause/volume errors while the player is booting.
+          }
+        }
+        resolveReady();
+      };
+
+      try {
+        const DosFn = (window as any).Dos;
+        if (typeof DosFn !== "function") {
+          throw new Error("Dos is not available");
+        }
+
+        const props = DosFn(
+          player,
+          dosOptions(
+            0,
+            (event: string) => {
+              if (event === "ci-ready") {
+                window.setTimeout(finish, 2500);
+              }
+            },
+            false,
+          ),
+        );
+        propsRef = props;
+
+        if (generation !== prewarmGeneration) {
+          try {
+            props.stop?.();
+          } catch {
+            // Ignore shutdown errors.
+          }
+          player.remove();
+          throw new Error("Prewarm cancelled.");
+        }
+
+        window.setTimeout(finish, 15000);
+        const state: PrewarmState = { player, props, ready };
+        prewarm = state;
+        return state;
+      } catch (error) {
+        player.remove();
+        prewarmPromise = null;
+        throw error;
+      }
+    })().catch((error) => {
+      prewarmPromise = null;
+      throw error;
+    });
+
+    return prewarmPromise;
+  }
+
+  function parkPrewarm(player: HTMLElement, props: any) {
+    try {
+      props?.setMouseCapture?.(false);
+      props?.setPaused?.(true);
+      props?.setVolume?.(0);
+    } catch {
+      // Ignore pause/volume errors while parking.
+    }
+    player.classList.add("doom-player--prewarm");
+    player.setAttribute("inert", "");
+    player.setAttribute("aria-hidden", "true");
+    document.body.appendChild(player);
+    prewarm = {
+      player: player as HTMLDivElement,
+      props,
+      ready: Promise.resolve(),
+    };
+    prewarmPromise = null;
+  }
+
+  function schedulePrewarm() {
+    if (isMobileViewport()) return;
+    const connection = (navigator as any).connection;
+    const slowConnection = ["slow-2g", "2g", "3g"].includes(
+      connection?.effectiveType,
+    );
+    if (connection?.saveData || slowConnection) return;
+
+    const start = () => {
+      void ensurePrewarm().catch(() => {
+        // The normal open flow surfaces errors if prewarming fails.
+      });
+    };
+
+    if ("requestIdleCallback" in window) {
+      (window as any).requestIdleCallback(start, { timeout: 2500 });
+    } else {
+      window.setTimeout(start, 1600);
+    }
+  }
+
   function initDoomEgg() {
     const peek = document.getElementById("doom-peek");
     const guy = document.getElementById("doomguy");
@@ -449,6 +654,7 @@
     ) as HTMLImageElement | null;
 
     if (!peek || !guy || !guyImage || peek.dataset.doomBound === "1") return;
+    if (isMobileViewport()) return;
     peek.dataset.doomBound = "1";
 
     const home = peek.parentElement;
@@ -471,14 +677,12 @@
     let landedAt = 0;
     let gifPreloaded = false;
     let tearStarted = false;
-    let tearScheduled = false;
     let tearRaf = 0;
-    let fallbackTear = 0;
     let stageEl: HTMLElement | null = null;
     let overlayEl: HTMLElement | null = null;
     let closeEl: HTMLButtonElement | null = null;
-    let loadingToast: HTMLElement | null = null;
     let currentProps: any = null;
+    let currentPlayerEl: HTMLElement | null = null;
     let restorePage = () => {};
 
     function preloadGif() {
@@ -551,6 +755,9 @@
       if (busy || closing) return;
       busy = true;
       preloadGif();
+      void ensurePrewarm().catch(() => {
+        // Prewarm is retried when the user actually opens the game.
+      });
       releaseFromFooter();
 
       const rect = peek.getBoundingClientRect();
@@ -610,7 +817,6 @@
       busy = false;
       landedAt = 0;
       tearStarted = false;
-      tearScheduled = false;
       peek.classList.remove(
         "doom-peek--free",
         "doom-peek--armed",
@@ -691,14 +897,11 @@
       tearRaf = 0;
       overlayEl?.remove();
       overlayEl = null;
-      loadingToast = null;
     }
 
     function startTear() {
       if (tearStarted || closing || !overlayEl) return;
       tearStarted = true;
-      window.clearTimeout(fallbackTear);
-      loadingToast?.classList.add("is-hidden");
 
       try {
         currentProps?.setVolume?.(0.55);
@@ -774,20 +977,29 @@
     function closeDoom() {
       if (closing) return;
       closing = true;
+      setDosCssActive(false);
 
-      document.removeEventListener("keydown", onKeyDown);
-      window.clearTimeout(fallbackTear);
+      activeEscapeHandler = null;
 
       if (tearRaf) cancelAnimationFrame(tearRaf);
       tearRaf = 0;
 
-      try {
-        activeDoomStop?.();
-      } catch {
-        // Ignore shutdown errors.
+      const props = currentProps;
+      const player = currentPlayerEl;
+
+      if (props && player) {
+        parkPrewarm(player, props);
+      } else {
+        try {
+          props?.stop?.();
+        } catch {
+          // Ignore shutdown errors.
+        }
       }
+
       activeDoomStop = null;
       currentProps = null;
+      currentPlayerEl = null;
 
       overlayEl?.classList.add("claw-closing");
       stageEl?.classList.add("doom-closing");
@@ -815,6 +1027,9 @@
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key !== "Escape") return;
+
+      event.preventDefault();
+      event.stopImmediatePropagation();
 
       if (document.pointerLockElement) {
         document.exitPointerLock?.();
@@ -885,10 +1100,6 @@
       stageEl.setAttribute("aria-modal", "true");
       stageEl.setAttribute("aria-label", "Doom (1993)");
 
-      const player = document.createElement("div");
-      player.className = "doom-player";
-      stageEl.appendChild(player);
-
       const rotate = document.createElement("div");
       rotate.className = "doom-rotate";
       rotate.textContent = "↻ ROTATE FOR FULLSCREEN";
@@ -958,79 +1169,82 @@
         <path class="claw-hot" d="" fill="none" stroke="#fff7ed" stroke-width="1"></path>
       `;
 
-      loadingToast = document.createElement("div");
-      loadingToast.className = "doom-loading-toast";
-      loadingToast.setAttribute("role", "status");
-      loadingToast.setAttribute("aria-live", "polite");
-      loadingToast.textContent = "LOADING DOOM…";
-
-      overlayEl.append(pageLayer, defs, outline, loadingToast);
+      overlayEl.append(pageLayer, defs, outline);
       document.body.appendChild(overlayEl);
+      setDosCssActive(true);
 
       const initial = buildClawGeometry(0);
       defs
         .querySelector("#doom-claw-shape")
         ?.setAttribute("d", initial.clip);
 
-      document.addEventListener("keydown", onKeyDown);
+      activeEscapeHandler = onKeyDown;
       window.setTimeout(() => {
         if (closing) return;
         closeEl?.focus({ preventScroll: true });
       }, 400);
 
-      fallbackTear = window.setTimeout(startTear, 12000);
+      const showError = (message: string) => {
+        if (!overlayEl) return;
+        const error = document.createElement("div");
+        error.className = "doom-error";
+        error.textContent = message;
+        overlayEl.appendChild(error);
+      };
+
+      let warm: PrewarmState;
+      try {
+        warm = await ensurePrewarm();
+      } catch {
+        if (!closing) showError("DOOM COULD NOT LOAD");
+        return;
+      }
+
+      if (closing || !stageEl?.isConnected) return;
+
+      currentPlayerEl = warm.player;
+      currentPlayerEl.classList.remove("doom-player--prewarm");
+      currentPlayerEl.removeAttribute("inert");
+      currentPlayerEl.removeAttribute("aria-hidden");
+      stageEl.appendChild(currentPlayerEl);
+      currentProps = warm.props;
+      prewarm = null;
+      prewarmPromise = null;
+
+      activeDoomStop = () => {
+        try {
+          currentProps?.stop?.();
+        } catch {
+          // Ignore shutdown errors.
+        }
+        currentProps = null;
+        currentPlayerEl = null;
+      };
+
+      await Promise.race([
+        warm.ready,
+        new Promise<void>((resolve) => window.setTimeout(resolve, 12000)),
+      ]);
+
+      if (closing || !stageEl?.isConnected) {
+        if (currentProps && currentPlayerEl) {
+          parkPrewarm(currentPlayerEl, currentProps);
+        }
+        currentProps = null;
+        currentPlayerEl = null;
+        activeDoomStop = null;
+        return;
+      }
 
       try {
-        await ensureDosAssets();
-        if (closing || !stageEl?.isConnected) return;
-
-        const DosFn = (window as any).Dos;
-        if (typeof DosFn !== "function") {
-          throw new Error("Dos is not available");
-        }
-
-        currentProps = DosFn(player, {
-          url: DOOM_BUNDLE,
-          pathPrefix: JSDOS_PATH_PREFIX,
-          kiosk: true,
-          autoStart: true,
-          renderAspect: "4/3",
-          imageRendering: "pixelated",
-          volume: 0,
-          mouseCapture: true,
-          noCursor: true,
-          mouseSensitivity: 0.6,
-          quickSave: false,
-          autoSave: false,
-          fsChanges: { local: false },
-          onEvent: (event: string) => {
-            if (
-              (event === "ci-ready" || event === "bnd-play") &&
-              !tearScheduled &&
-              !tearStarted &&
-              !closing
-            ) {
-              tearScheduled = true;
-              window.setTimeout(startTear, 1500);
-            }
-          },
-        });
-
-        activeDoomStop = () => {
-          try {
-            currentProps?.stop?.();
-          } catch {
-            // Ignore shutdown errors.
-          }
-          currentProps = null;
-        };
+        currentProps.setMouseCapture?.(true);
+        currentProps.setPaused?.(false);
+        currentProps.setVolume?.(0.55);
       } catch {
-        window.clearTimeout(fallbackTear);
-        fallbackTear = 0;
-        if (!closing && loadingToast) {
-          loadingToast.textContent = "DOOM COULD NOT LOAD";
-        }
+        // Ignore resume/volume errors.
       }
+
+      startTear();
     }
 
     guy.addEventListener("pointerenter", (event) => {
@@ -1056,13 +1270,11 @@
       }
 
       void openDoom().catch(() => {
-        window.clearTimeout(fallbackTear);
-        fallbackTear = 0;
-        if (loadingToast) {
-          loadingToast.textContent = "DOOM COULD NOT LOAD";
-        }
+        // openDoom reports load failures in the overlay.
       });
     });
+
+    schedulePrewarm();
   }
 
   if (document.readyState === "loading") {
@@ -1080,6 +1292,9 @@
       // Ignore shutdown errors.
     }
     activeDoomStop = null;
+    activeEscapeHandler = null;
+    stopPrewarm();
+    setDosCssActive(false);
     document.getElementById("doom-stage")?.remove();
     document.querySelector(".claw-layer")?.remove();
     document.querySelector(".doom-close")?.remove();
