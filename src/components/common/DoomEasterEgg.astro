@@ -1,0 +1,1095 @@
+<div id="doom-peek" class="doom-peek">
+  <button
+    id="doomguy"
+    class="doomguy"
+    type="button"
+    aria-label="Doom easter egg"
+  >
+    <img
+      id="doomguy-image"
+      class="doomguy-image"
+      src="/images/doom-slayer-idle.png"
+      alt=""
+      width="168"
+      height="188"
+      draggable="false"
+    />
+  </button>
+</div>
+
+<style is:global>
+  .doom-peek {
+    position: absolute;
+    right: 1rem;
+    bottom: 0;
+    width: 56px;
+    height: 26px;
+    overflow: hidden;
+    z-index: 40;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .doom-peek--free {
+    position: fixed;
+    height: 63px;
+    overflow: visible;
+    z-index: 60;
+    transition:
+      left 0.42s cubic-bezier(0.2, 0.9, 0.2, 1),
+      top 0.42s cubic-bezier(0.2, 0.9, 0.2, 1);
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.6));
+    will-change: left, top;
+  }
+
+  .doomguy {
+    display: block;
+    width: 56px;
+    height: 63px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: default;
+    transform-origin: 50% 70%;
+    animation: doom-bob 3.6s ease-in-out infinite;
+  }
+
+  .doomguy-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .doom-peek:focus-within {
+    height: 63px;
+    overflow: visible;
+  }
+
+  .doomguy:focus-visible {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  .doom-peek--free .doomguy {
+    cursor: pointer;
+  }
+
+  .doomguy--armed {
+    cursor: pointer;
+  }
+
+  .doomguy--armed .doomguy-image {
+    animation: doom-armed-glow 1s ease-in-out infinite;
+  }
+
+  .doom-peek--landed {
+    animation: doom-land 0.65s ease-out;
+  }
+
+  .doom-puff {
+    position: fixed;
+    width: 64px;
+    height: 64px;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 55;
+    background: radial-gradient(
+      circle,
+      rgba(249, 115, 22, 0.55) 0%,
+      rgba(249, 115, 22, 0) 70%
+    );
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+
+  @keyframes doom-bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(2px);
+    }
+  }
+
+  @keyframes doom-armed-glow {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.75));
+    }
+    50% {
+      filter: drop-shadow(0 0 18px rgba(239, 68, 68, 0.95));
+    }
+  }
+
+  @keyframes doom-land {
+    0% {
+      filter: drop-shadow(0 0 0 rgba(249, 115, 22, 0));
+    }
+    40% {
+      filter: drop-shadow(0 0 16px rgba(249, 115, 22, 0.9));
+    }
+    100% {
+      filter: drop-shadow(0 0 0 rgba(249, 115, 22, 0));
+    }
+  }
+
+  .doom-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    background: #000;
+    cursor: none;
+    opacity: 1;
+    transition: opacity 0.35s ease;
+  }
+
+  .doom-stage.doom-closing {
+    opacity: 0;
+  }
+
+  .doom-player {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: #000;
+    cursor: none;
+  }
+
+  /* js-dos leaves a 4px sidebar slider visible even in kiosk mode. */
+  .doom-player .sidebar-slider {
+    display: none !important;
+  }
+
+  .doom-close {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid rgba(248, 113, 113, 0.55);
+    border-radius: 9999px;
+    background: rgba(8, 8, 8, 0.72);
+    color: #fca5a5;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 19px;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      opacity 0.3s ease,
+      transform 0.2s ease;
+  }
+
+  .doom-close:hover {
+    background: rgba(127, 29, 29, 0.92);
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  .doom-close.doom-closing {
+    opacity: 0;
+  }
+
+  .doom-rotate {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    z-index: 6;
+    display: none;
+    transform: translateX(-50%);
+    color: #fbbf24;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) and (orientation: portrait) {
+    .doom-rotate {
+      display: block;
+    }
+  }
+
+  .doom-help {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    z-index: 7;
+    min-width: 154px;
+    padding: 8px 10px;
+    border: 1px solid rgba(74, 222, 128, 0.28);
+    border-radius: 6px;
+    background: rgba(4, 8, 5, 0.78);
+    color: #d1fae5;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    line-height: 1.65;
+    pointer-events: none;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+
+  .doom-help-title {
+    margin-bottom: 4px;
+    color: #4ade80;
+    font-size: 8px;
+    letter-spacing: 0.24em;
+  }
+
+  .doom-help-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    white-space: nowrap;
+  }
+
+  .doom-help-row kbd {
+    padding: 0 4px;
+    border: 1px solid rgba(251, 191, 36, 0.28);
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fbbf24;
+    font: inherit;
+  }
+
+  .doom-help-row span {
+    color: #d1fae5;
+    text-align: right;
+  }
+
+  @media (max-width: 640px) {
+    .doom-help {
+      display: none;
+    }
+  }
+
+  .claw-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .claw-layer.claw-closing {
+    opacity: 0;
+  }
+
+  .claw-page {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    background: #0d1117;
+    will-change: clip-path, opacity;
+  }
+
+  .claw-clone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  .claw-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .claw-outline {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 1;
+  }
+
+  .claw-shake {
+    animation: claw-shake 0.22s linear;
+  }
+
+  @keyframes claw-shake {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    20% {
+      transform: translate3d(-5px, 3px, 0);
+    }
+    40% {
+      transform: translate3d(5px, -3px, 0);
+    }
+    60% {
+      transform: translate3d(-4px, -2px, 0);
+    }
+    80% {
+      transform: translate3d(3px, 2px, 0);
+    }
+  }
+
+  .doom-loading-toast {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    z-index: 3;
+    transform: translateX(-50%);
+    padding: 8px 14px;
+    border: 1px solid rgba(74, 222, 128, 0.45);
+    border-radius: 9999px;
+    background: rgba(4, 8, 5, 0.88);
+    color: #4ade80;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .doom-loading-toast.is-hidden {
+    opacity: 0;
+  }
+
+  @media (max-width: 640px) {
+    .doom-loading-toast {
+      bottom: 14px;
+      padding: 7px 10px;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .doomguy,
+    .doomguy--armed .doomguy-image,
+    .doom-peek--landed,
+    .claw-shake {
+      animation: none !important;
+    }
+
+    .doom-peek--free,
+    .doom-stage,
+    .doom-close,
+    .claw-layer {
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<script>
+  const STILL_SRC = "/images/doom-slayer-idle.png";
+  const GIF_SRC = "/images/doom-slayer.gif";
+  const JSDOS_CSS = "/doom/jsdos/js-dos.css";
+  const JSDOS_SCRIPT = "/doom/jsdos/js-dos.js";
+  const JSDOS_PATH_PREFIX = "/doom/jsdos/emulators/";
+  const DOOM_BUNDLE = "/doom/doom-fps.jsdos";
+
+  let jsdosAssetsPromise: Promise<void> | null = null;
+  let activeDoomStop: (() => void) | null = null;
+
+  function ensureDosAssets(): Promise<void> {
+    if (typeof (window as any).Dos === "function") return Promise.resolve();
+    if (jsdosAssetsPromise) return jsdosAssetsPromise;
+
+    jsdosAssetsPromise = new Promise((resolve, reject) => {
+      if (!document.querySelector("link[data-jsdos]")) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = JSDOS_CSS;
+        link.dataset.jsdos = "true";
+        document.head.appendChild(link);
+      }
+
+      const script = document.createElement("script");
+      script.src = JSDOS_SCRIPT;
+      script.async = true;
+      script.onload = () => {
+        if (typeof (window as any).Dos === "function") resolve();
+        else reject(new Error("js-dos did not expose Dos"));
+      };
+      script.onerror = () => {
+        jsdosAssetsPromise = null;
+        reject(new Error("js-dos failed to load"));
+      };
+      document.head.appendChild(script);
+    });
+
+    return jsdosAssetsPromise;
+  }
+
+  function initDoomEgg() {
+    const peek = document.getElementById("doom-peek");
+    const guy = document.getElementById("doomguy");
+    const guyImage = document.getElementById(
+      "doomguy-image",
+    ) as HTMLImageElement | null;
+
+    if (!peek || !guy || !guyImage || peek.dataset.doomBound === "1") return;
+    peek.dataset.doomBound = "1";
+
+    const home = peek.parentElement;
+    const homeNext = peek.nextSibling;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    const spots = [
+      { x: 0.07, y: 0.16 },
+      { x: 0.79, y: 0.13 },
+      { x: 0.08, y: 0.48 },
+      { x: 0.81, y: 0.44 },
+      { x: 0.16, y: 0.76 },
+    ];
+
+    let stage = 0;
+    let busy = false;
+    let closing = false;
+    let landedAt = 0;
+    let gifPreloaded = false;
+    let tearStarted = false;
+    let tearScheduled = false;
+    let tearRaf = 0;
+    let fallbackTear = 0;
+    let stageEl: HTMLElement | null = null;
+    let overlayEl: HTMLElement | null = null;
+    let closeEl: HTMLButtonElement | null = null;
+    let loadingToast: HTMLElement | null = null;
+    let currentProps: any = null;
+    let restorePage = () => {};
+
+    function preloadGif() {
+      if (gifPreloaded) return;
+      gifPreloaded = true;
+      const image = new Image();
+      image.src = GIF_SRC;
+    }
+
+    function pickTarget(currentX: number, currentY: number) {
+      const width = 56;
+      const height = 63;
+      const margin = 20;
+      const maxX = Math.max(margin, window.innerWidth - width - margin);
+      const maxY = Math.max(margin, window.innerHeight - height - margin);
+      const minDistance =
+        Math.min(window.innerWidth, window.innerHeight) * 0.3;
+
+      const options = spots
+        .map((spot) => ({
+          x: Math.min(maxX, Math.max(margin, spot.x * window.innerWidth)),
+          y: Math.min(maxY, Math.max(margin, spot.y * window.innerHeight)),
+        }))
+        .filter(
+          (spot) =>
+            Math.hypot(spot.x - currentX, spot.y - currentY) > minDistance,
+        );
+
+      const pool = options.length ? options : spots;
+      return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    function spawnPuff(x: number, y: number) {
+      const puff = document.createElement("span");
+      puff.className = "doom-puff";
+      puff.style.left = `${x}px`;
+      puff.style.top = `${y}px`;
+      document.body.appendChild(puff);
+
+      const animation = puff.animate(
+        [
+          { transform: "translate(-50%, -50%) scale(0.2)", opacity: 0.8 },
+          { transform: "translate(-50%, -50%) scale(1.8)", opacity: 0 },
+        ],
+        { duration: 480, easing: "ease-out" },
+      );
+
+      animation.onfinish = () => puff.remove();
+    }
+
+    function releaseFromFooter() {
+      if (peek.classList.contains("doom-peek--free")) return;
+
+      const rect = peek.getBoundingClientRect();
+      document.body.appendChild(peek);
+      peek.classList.add("doom-peek--free");
+      peek.style.transition = "none";
+      peek.style.left = `${rect.left}px`;
+      peek.style.top = `${rect.top}px`;
+      peek.style.right = "auto";
+      peek.style.bottom = "auto";
+      peek.style.width = "56px";
+      peek.style.height = "63px";
+
+      void peek.offsetWidth;
+      peek.style.transition = "";
+    }
+
+    function dash() {
+      if (busy || closing) return;
+      busy = true;
+      preloadGif();
+      releaseFromFooter();
+
+      const rect = peek.getBoundingClientRect();
+      const target = pickTarget(rect.left, rect.top);
+      spawnPuff(rect.left + 28, rect.top + 31);
+
+      if (typeof guy.animate === "function") {
+        guy.animate(
+          [
+            { transform: "scale(1) rotate(0deg)" },
+            { transform: "scale(1.25) rotate(-12deg)", offset: 0.35 },
+            { transform: "scale(1) rotate(0deg)" },
+          ],
+          {
+            duration: reduceMotion ? 1 : 420,
+            easing: "ease-out",
+          },
+        );
+      }
+
+      peek.style.left = `${target.x}px`;
+      peek.style.top = `${target.y}px`;
+
+      stage = Math.min(2, stage + 1);
+
+      window.setTimeout(
+        () => {
+          busy = false;
+          landedAt = performance.now();
+          if (!reduceMotion) {
+            peek.classList.add("doom-peek--landed");
+            window.setTimeout(
+              () => peek.classList.remove("doom-peek--landed"),
+              680,
+            );
+          }
+        },
+        reduceMotion ? 20 : 460,
+      );
+    }
+
+    function arm() {
+      if (closing) return;
+      releaseFromFooter();
+      stage = 3;
+      peek.classList.add("doom-peek--armed");
+      guy.classList.add("doomguy--armed");
+      guy.setAttribute("aria-label", "Open Doom");
+      guy.title = "Open Doom";
+
+      if (guyImage.getAttribute("src") !== GIF_SRC) {
+        guyImage.src = GIF_SRC;
+      }
+    }
+
+    function resetGuy() {
+      stage = 0;
+      busy = false;
+      landedAt = 0;
+      tearStarted = false;
+      tearScheduled = false;
+      peek.classList.remove(
+        "doom-peek--free",
+        "doom-peek--armed",
+        "doom-peek--landed",
+      );
+      guy.classList.remove("doomguy--armed");
+      guy.setAttribute("aria-label", "Doom easter egg");
+      guy.removeAttribute("title");
+      guyImage.src = STILL_SRC;
+      peek.style.cssText = "";
+
+      if (home) {
+        if (homeNext && homeNext.parentNode === home) {
+          home.insertBefore(peek, homeNext);
+        } else {
+          home.appendChild(peek);
+        }
+      }
+    }
+
+    function buildClawGeometry(multiplier: number) {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const outer = `M0 0H${width}V${height}H0Z`;
+      const start = { x: width * 0.86, y: -height * 0.18 };
+      const end = { x: width * 0.14, y: height * 1.18 };
+      const dx = end.x - start.x;
+      const dy = end.y - start.y;
+      const length = Math.hypot(dx, dy);
+      const ux = dx / length;
+      const uy = dy / length;
+      const px = -uy;
+      const py = ux;
+      const spacing = Math.max(58, Math.min(104, width * 0.072));
+      const baseWidth = Math.max(34, Math.min(78, width * 0.052));
+      const strokeWidth = baseWidth * multiplier;
+      const samples = 28;
+      const claws: string[] = [];
+
+      for (let claw = 0; claw < 4; claw++) {
+        const offset = (claw - 1.5) * spacing;
+        const curve = (claw - 1.5) * 10;
+        const left: string[] = [];
+        const right: string[] = [];
+
+        for (let index = 0; index <= samples; index++) {
+          const t = index / samples;
+          const taper = Math.pow(Math.sin(Math.PI * t), 0.62);
+          const jag =
+            1 +
+            0.18 * Math.sin(t * 37 + claw * 1.9) +
+            0.07 * Math.sin(t * 89 + claw * 2.7);
+          const half = (strokeWidth * taper * jag) / 2;
+          const bend = Math.sin(Math.PI * t) * curve;
+          const cx = start.x + dx * t + px * (offset + bend);
+          const cy = start.y + dy * t + py * (offset + bend);
+
+          left.push(
+            `${(cx + px * half).toFixed(1)} ${(cy + py * half).toFixed(1)}`,
+          );
+          right.push(
+            `${(cx - px * half).toFixed(1)} ${(cy - py * half).toFixed(1)}`,
+          );
+        }
+
+        right.reverse();
+        claws.push(`M${left.join("L")}L${right.join("L")}Z`);
+      }
+
+      return {
+        clip: outer + claws.join(""),
+        outline: claws.join(""),
+      };
+    }
+
+    function finishTear() {
+      if (tearRaf) cancelAnimationFrame(tearRaf);
+      tearRaf = 0;
+      overlayEl?.remove();
+      overlayEl = null;
+      loadingToast = null;
+    }
+
+    function startTear() {
+      if (tearStarted || closing || !overlayEl) return;
+      tearStarted = true;
+      window.clearTimeout(fallbackTear);
+      loadingToast?.classList.add("is-hidden");
+
+      try {
+        currentProps?.setVolume?.(0.55);
+      } catch {
+        // Ignore volume errors while the player is booting.
+      }
+
+      if (reduceMotion) {
+        finishTear();
+        return;
+      }
+
+      overlayEl.classList.add("claw-shake");
+      window.setTimeout(() => overlayEl?.classList.remove("claw-shake"), 240);
+
+      const clipShape = document.getElementById("doom-claw-shape");
+      const outline = overlayEl.querySelector(
+        ".claw-outline",
+      ) as HTMLElement | null;
+      const pageLayer = overlayEl.querySelector(
+        ".claw-page",
+      ) as HTMLElement | null;
+      const glow = overlayEl.querySelector(
+        ".claw-glow",
+      ) as SVGPathElement | null;
+      const core = overlayEl.querySelector(
+        ".claw-core",
+      ) as SVGPathElement | null;
+      const hot = overlayEl.querySelector(
+        ".claw-hot",
+      ) as SVGPathElement | null;
+
+      const startTime = performance.now();
+      const duration = 1250;
+      const easeOut = (value: number) => 1 - Math.pow(1 - value, 3);
+
+      const tick = (now: number) => {
+        if (closing || !overlayEl) return;
+
+        const progress = Math.min(1, (now - startTime) / duration);
+        const open = easeOut(Math.min(1, progress / 0.42));
+        const burst = easeOut(Math.max(0, (progress - 0.42) / 0.58));
+        const multiplier = open + burst * 8;
+        const geometry = buildClawGeometry(multiplier);
+
+        clipShape?.setAttribute("d", geometry.clip);
+        glow?.setAttribute("d", geometry.outline);
+        core?.setAttribute("d", geometry.outline);
+        hot?.setAttribute("d", geometry.outline);
+
+        const fade =
+          progress < 0.52
+            ? 1
+            : 1 - (progress - 0.52) / 0.48;
+
+        if (pageLayer) {
+          pageLayer.style.opacity = String(Math.max(0, fade));
+        }
+        if (outline) {
+          outline.style.opacity = String(Math.max(0, fade));
+        }
+
+        if (progress < 1) {
+          tearRaf = requestAnimationFrame(tick);
+        } else {
+          finishTear();
+        }
+      };
+
+      tearRaf = requestAnimationFrame(tick);
+    }
+
+    function closeDoom() {
+      if (closing) return;
+      closing = true;
+
+      document.removeEventListener("keydown", onKeyDown);
+      window.clearTimeout(fallbackTear);
+
+      if (tearRaf) cancelAnimationFrame(tearRaf);
+      tearRaf = 0;
+
+      try {
+        activeDoomStop?.();
+      } catch {
+        // Ignore shutdown errors.
+      }
+      activeDoomStop = null;
+      currentProps = null;
+
+      overlayEl?.classList.add("claw-closing");
+      stageEl?.classList.add("doom-closing");
+      closeEl?.classList.add("doom-closing");
+
+      const finish = () => {
+        overlayEl?.remove();
+        stageEl?.remove();
+        closeEl?.remove();
+        overlayEl = null;
+        stageEl = null;
+        closeEl = null;
+        restorePage();
+        resetGuy();
+        closing = false;
+      };
+
+      if (reduceMotion) {
+        finish();
+        return;
+      }
+
+      window.setTimeout(finish, 380);
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+
+      if (document.pointerLockElement) {
+        document.exitPointerLock?.();
+        return;
+      }
+
+      closeDoom();
+    }
+
+    async function openDoom() {
+      if (stageEl || closing) return;
+
+      const scrollY = window.scrollY;
+      const scrollX = window.scrollX;
+      const shell = document.getElementById("page-shell");
+      const cloneSource = shell || document.body;
+
+      const clone = cloneSource.cloneNode(true) as HTMLElement;
+      clone.removeAttribute("id");
+      clone.querySelectorAll("script").forEach((element) => element.remove());
+      clone
+        .querySelectorAll("[id]")
+        .forEach((element) => element.removeAttribute("id"));
+      clone
+        .querySelectorAll(".doom-peek")
+        .forEach((element) => element.remove());
+      clone.querySelectorAll("[x-show]").forEach((element) => {
+        const expression = element.getAttribute("x-show") || "";
+        (element as HTMLElement).style.display = expression.includes("!open")
+          ? ""
+          : "none";
+      });
+      clone
+        .querySelectorAll("[x-transition]")
+        .forEach((element) => element.removeAttribute("x-transition"));
+      clone.setAttribute("x-ignore", "");
+      clone.setAttribute("inert", "");
+      clone.setAttribute("aria-hidden", "true");
+      clone.classList.add("claw-clone");
+      clone.style.transform = `translate3d(${-scrollX}px, ${-scrollY}px, 0)`;
+
+      if (shell) {
+        shell.setAttribute("inert", "");
+        shell.setAttribute("aria-hidden", "true");
+      }
+
+      const previousOverflow = document.body.style.overflow;
+      const previousPadding = document.body.style.paddingRight;
+      const scrollbar =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      if (scrollbar > 0) {
+        document.body.style.paddingRight = `${scrollbar}px`;
+      }
+      restorePage = () => {
+        document.body.style.overflow = previousOverflow;
+        document.body.style.paddingRight = previousPadding;
+        if (shell) {
+          shell.removeAttribute("inert");
+          shell.removeAttribute("aria-hidden");
+        }
+      };
+
+      stageEl = document.createElement("div");
+      stageEl.id = "doom-stage";
+      stageEl.className = "doom-stage";
+      stageEl.setAttribute("role", "dialog");
+      stageEl.setAttribute("aria-modal", "true");
+      stageEl.setAttribute("aria-label", "Doom (1993)");
+
+      const player = document.createElement("div");
+      player.className = "doom-player";
+      stageEl.appendChild(player);
+
+      const rotate = document.createElement("div");
+      rotate.className = "doom-rotate";
+      rotate.textContent = "↻ ROTATE FOR FULLSCREEN";
+      stageEl.appendChild(rotate);
+
+      const help = document.createElement("div");
+      help.className = "doom-help";
+      help.setAttribute("aria-hidden", "true");
+      help.innerHTML = `
+        <div class="doom-help-title">CONTROLS</div>
+        <div class="doom-help-row"><kbd>CLICK</kbd><span>CAPTURE MOUSE</span></div>
+        <div class="doom-help-row"><kbd>W/S</kbd><span>MOVE</span></div>
+        <div class="doom-help-row"><kbd>A/D</kbd><span>STRAFE</span></div>
+        <div class="doom-help-row"><kbd>MOUSE</kbd><span>LOOK</span></div>
+        <div class="doom-help-row"><kbd>CTRL</kbd><span>FIRE</span></div>
+        <div class="doom-help-row"><kbd>SPACE</kbd><span>USE</span></div>
+        <div class="doom-help-row"><kbd>ESC</kbd><span>RELEASE MOUSE</span></div>
+      `;
+      stageEl.appendChild(help);
+
+      document.body.appendChild(stageEl);
+
+      closeEl = document.createElement("button");
+      closeEl.type = "button";
+      closeEl.className = "doom-close";
+      closeEl.setAttribute("aria-label", "Close Doom");
+      closeEl.title = "Close (Esc)";
+      closeEl.textContent = "✕";
+      closeEl.addEventListener("click", closeDoom);
+      document.body.appendChild(closeEl);
+
+      overlayEl = document.createElement("div");
+      overlayEl.className = "claw-layer";
+
+      const pageLayer = document.createElement("div");
+      pageLayer.className = "claw-page";
+      pageLayer.appendChild(clone);
+      pageLayer.style.clipPath = "url(#doom-claw-clip)";
+      pageLayer.style.setProperty(
+        "-webkit-clip-path",
+        "url(#doom-claw-clip)",
+      );
+
+      const svgNS = "http://www.w3.org/2000/svg";
+      const defs = document.createElementNS(svgNS, "svg");
+      defs.setAttribute("class", "claw-defs");
+      defs.setAttribute("aria-hidden", "true");
+      defs.innerHTML =
+        '<defs><clipPath id="doom-claw-clip" clipPathUnits="userSpaceOnUse" clip-rule="evenodd"><path id="doom-claw-shape" clip-rule="evenodd" d=""></path></clipPath></defs>';
+
+      const outline = document.createElementNS(svgNS, "svg");
+      outline.setAttribute("class", "claw-outline");
+      outline.setAttribute(
+        "viewBox",
+        `0 0 ${window.innerWidth} ${window.innerHeight}`,
+      );
+      outline.setAttribute("preserveAspectRatio", "none");
+      outline.setAttribute("aria-hidden", "true");
+      outline.innerHTML = `
+        <defs>
+          <filter id="doom-claw-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="6"></feGaussianBlur>
+          </filter>
+        </defs>
+        <path class="claw-glow" d="" fill="none" stroke="#ef4444" stroke-width="14" opacity="0.45" filter="url(#doom-claw-glow)"></path>
+        <path class="claw-core" d="" fill="none" stroke="#f97316" stroke-width="3"></path>
+        <path class="claw-hot" d="" fill="none" stroke="#fff7ed" stroke-width="1"></path>
+      `;
+
+      loadingToast = document.createElement("div");
+      loadingToast.className = "doom-loading-toast";
+      loadingToast.setAttribute("role", "status");
+      loadingToast.setAttribute("aria-live", "polite");
+      loadingToast.textContent = "LOADING DOOM…";
+
+      overlayEl.append(pageLayer, defs, outline, loadingToast);
+      document.body.appendChild(overlayEl);
+
+      const initial = buildClawGeometry(0);
+      defs
+        .querySelector("#doom-claw-shape")
+        ?.setAttribute("d", initial.clip);
+
+      document.addEventListener("keydown", onKeyDown);
+      window.setTimeout(() => {
+        if (closing) return;
+        closeEl?.focus({ preventScroll: true });
+      }, 400);
+
+      fallbackTear = window.setTimeout(startTear, 12000);
+
+      try {
+        await ensureDosAssets();
+        if (closing || !stageEl?.isConnected) return;
+
+        const DosFn = (window as any).Dos;
+        if (typeof DosFn !== "function") {
+          throw new Error("Dos is not available");
+        }
+
+        currentProps = DosFn(player, {
+          url: DOOM_BUNDLE,
+          pathPrefix: JSDOS_PATH_PREFIX,
+          kiosk: true,
+          autoStart: true,
+          renderAspect: "4/3",
+          imageRendering: "pixelated",
+          volume: 0,
+          mouseCapture: true,
+          noCursor: true,
+          mouseSensitivity: 0.6,
+          quickSave: false,
+          autoSave: false,
+          fsChanges: { local: false },
+          onEvent: (event: string) => {
+            if (
+              (event === "ci-ready" || event === "bnd-play") &&
+              !tearScheduled &&
+              !tearStarted &&
+              !closing
+            ) {
+              tearScheduled = true;
+              window.setTimeout(startTear, 1500);
+            }
+          },
+        });
+
+        activeDoomStop = () => {
+          try {
+            currentProps?.stop?.();
+          } catch {
+            // Ignore shutdown errors.
+          }
+          currentProps = null;
+        };
+      } catch {
+        window.clearTimeout(fallbackTear);
+        fallbackTear = 0;
+        if (!closing && loadingToast) {
+          loadingToast.textContent = "DOOM COULD NOT LOAD";
+        }
+      }
+    }
+
+    guy.addEventListener("pointerenter", (event) => {
+      const pointerType = (event as PointerEvent).pointerType;
+      if (pointerType === "touch") return;
+      if (closing) return;
+      if (performance.now() - landedAt < 250) return;
+
+      if (stage < 2) {
+        dash();
+      } else if (stage === 2) {
+        arm();
+      }
+    });
+
+    guy.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (closing) return;
+
+      if (stage < 2) {
+        dash();
+        return;
+      }
+
+      void openDoom().catch(() => {
+        window.clearTimeout(fallbackTear);
+        fallbackTear = 0;
+        if (loadingToast) {
+          loadingToast.textContent = "DOOM COULD NOT LOAD";
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDoomEgg);
+  } else {
+    initDoomEgg();
+  }
+
+  document.addEventListener("astro:page-load", initDoomEgg);
+
+  document.addEventListener("astro:before-swap", () => {
+    try {
+      activeDoomStop?.();
+    } catch {
+      // Ignore shutdown errors.
+    }
+    activeDoomStop = null;
+    document.getElementById("doom-stage")?.remove();
+    document.querySelector(".claw-layer")?.remove();
+    document.querySelector(".doom-close")?.remove();
+    document.getElementById("page-shell")?.removeAttribute("inert");
+    document.getElementById("page-shell")?.removeAttribute("aria-hidden");
+    document
+      .querySelectorAll("body > #doom-peek")
+      .forEach((element) => element.remove());
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+  });
+</script>

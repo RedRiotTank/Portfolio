@@ -17,13 +17,15 @@ const lang = getLangFromUrl(Astro.url);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body
-    class="bg-[#0d1117] text-white font-sans min-h-screen flex flex-col"
+    class="bg-[#0d1117] text-white font-sans"
     transition:animate={fade({ duration: "0.4s" })}
   >
-    <Header />
-    <main class="flex-grow">
-      <slot />
-    </main>
-    <Footer />
+    <div id="page-shell" class="flex min-h-screen flex-col">
+      <Header />
+      <main class="flex-grow">
+        <slot />
+      </main>
+      <Footer />
+    </div>
   </body>
 </html>
