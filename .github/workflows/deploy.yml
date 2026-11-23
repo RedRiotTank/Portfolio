@@ -7,6 +7,9 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      # Repo variable; fallback keeps the single-server homelab working.
+      DEPLOY_ROOT: ${{ vars.DEPLOY_ROOT || '/opt/compose' }}
 
     steps:
       - name: Checkout code
@@ -31,7 +34,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            docker run --rm -v /opt/portfolio:/target alpine sh -c 'rm -rf /target/html/* && chmod 777 /target/html'
+            docker run --rm -v "${{ env.DEPLOY_ROOT }}/portfolio:/target" alpine sh -c 'rm -rf /target/html/* && chmod 777 /target/html'
 
       - name: Deploy dist folder via SCP
         uses: appleboy/scp-action@v0.1.7
@@ -41,7 +44,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: "dist/"
-          target: "/opt/portfolio/html/"
+          target: "${{ env.DEPLOY_ROOT }}/portfolio/html/"
           strip_components: 1
 
       - name: Reload Nginx in Docker
